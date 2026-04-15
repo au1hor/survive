@@ -53,19 +53,21 @@ public class Char
     public string TextLog()
     {
         Misc misc = Misc.Instance;
+        string oColor(string x,float y) => misc.ColorStats(x,y);
+        string strColor(string x,string y) => misc.ColorStr(x,y);
         string log;
         var s = Random.Range(1,3);
         if (s == 2)
         {
-            log = $@"A {misc.ColorForStatus(nameof(name))} is currently created. they stats are:
-            {misc.ColorForStatus(nameof(health),health)} | Damage[{misc.ColorForStatus(nameof(damage),damage)}]
-            Speed[{misc.ColorForStatus(nameof(speed),speed)}] | AttackSpeed[{misc.ColorForStatus(nameof(attackSpeed),attackSpeed):f1}
+            log = $@"A {strColor(name,"yellow")} is currently created. they stats are:
+            {oColor(nameof(health),health)} | {oColor(nameof(damage),damage)}
+            {oColor(nameof(speed),speed)} | {oColor(nameof(attackSpeed),attackSpeed)}
             word wrap is good???";
         }else
         {
             log = $"{misc.SetColor("red")}Go fuck Yourselv{misc.CloseColor()}";
         }
-        
+         
         return log;
     }
     public void SetHealth(float value)

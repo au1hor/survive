@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Reflection;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class Misc : MonoBehaviour
 {
     public static Misc Instance{get; private set;}
-    public Dictionary<string,string> cores = new Dictionary<string, string>()
+    public Dictionary<string,string> colors = new Dictionary<string, string>()
     {
         {"red","#FF0000"},
         {"green","#00FF00"},
@@ -30,14 +31,18 @@ public class Misc : MonoBehaviour
     }
     public string SetColor(string color)
     {
-        string colorSet = $"<color={cores[color]}>";
+        string colorSet = $"<color={colors[color]}>";
         return colorSet;
     }
     public string CloseColor()
     {
-        return $"</color>:";
+        return $"</color>";
     }
-    public string ColorForStatus(string name, float value = 0)
+    public string ColorStr(string str, string color)
+    {
+        return $"{SetColor(color) + str + CloseColor()}";
+    }
+    public string ColorStats(string name, float value = 0)
     {
         string color ="";
         switch (name)

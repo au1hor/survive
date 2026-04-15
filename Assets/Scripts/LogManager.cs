@@ -11,10 +11,10 @@ public class LogManager : MonoBehaviour
     public ScrollRect scrollRect;
     public ClasseSo testSo;
 
-    public void Sort()
+    public void Sort(string name)
     {
-       Char esper = new FactoryChar(testSo).Create("Esper");
-       AdicionarItem(esper.TextLog());
+       Char @char = CharManager.Instance.createChar(name);
+       AdicionarItem(@char.TextLog());
     }
     public void AdicionarItem(string text)
     {
