@@ -52,14 +52,18 @@ public class Char
     }
     public string TextLog()
     {
+        Misc misc = Misc.Instance;
         string log;
         var s = Random.Range(1,3);
         if (s == 2)
         {
-            log = $"A {name} is currently created. they stats are:\n Health[{health:f1}] | Damage[{damage:f1}]\n Speed[{Speed:f1}] | AttackSpeed[{attackSpeed:f1}\n word wrap is good?]";
+            log = $@"A {misc.ColorForStatus(nameof(name))} is currently created. they stats are:
+            {misc.ColorForStatus(nameof(health),health)} | Damage[{misc.ColorForStatus(nameof(damage),damage)}]
+            Speed[{misc.ColorForStatus(nameof(speed),speed)}] | AttackSpeed[{misc.ColorForStatus(nameof(attackSpeed),attackSpeed):f1}
+            word wrap is good???";
         }else
         {
-            log = "Go fuck Yourselv";
+            log = $"{misc.SetColor("red")}Go fuck Yourselv{misc.CloseColor()}";
         }
         
         return log;
