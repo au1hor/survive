@@ -10,11 +10,10 @@ public class LogManager : MonoBehaviour
     public GameObject prefabText;
     public ScrollRect scrollRect;
     public ClasseSo testSo;
-
     public void Sort(string name)
     {
        Char @char = CharManager.Instance.createChar(name);
-       AdicionarItem(@char.TextLog());
+       AdicionarItem(@char.TextLog()); //vai enviar a mensagem dentro do character pra função do log
     }
     public void AdicionarItem(string text)
     {

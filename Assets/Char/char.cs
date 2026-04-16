@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FactoryChar{
@@ -26,6 +27,7 @@ public class FactoryChar{
         return new Char(name,health,damage,speed,attackSpeed);
     }
 }
+
 public class Char
 {
     string name;
@@ -33,11 +35,29 @@ public class Char
     float damage;
     float speed;
     float attackSpeed;
+    int level;
     string Name => name;
     public float Health => health;
     public float Damage =>damage;
     public float Speed => speed;
     public float AttackSpeed => attackSpeed;
+    public int Level => level;
+    public List<info> infos;
+    public Dictionary<string,object> objs;
+    public enum valueType
+    {
+        Int,
+        Float,
+        String
+    }
+    public struct info
+    {
+       public string infoName;
+       public valueType valueType;
+       public int valueInt;
+       public float valueFloat;
+       public string valueString;
+    }
     public Char(string name, float health, float damage, float speed, float attackSpeed)
     {
         this.name = name;
@@ -69,6 +89,41 @@ public class Char
         if (health <= 0)
         {
             Death();
+        }
+    }
+    public void getAllStats()
+    {
+        objs = new Dictionary<string, object>()
+        {
+            {"Name",Name},
+            {"Health",Health},
+            {"Damage",Damage},
+            {"Speed",speed},
+            {"AttackSpeed",AttackSpeed},
+            {"Level",Level}
+        };
+        foreach (var entry in objs)
+        {
+            string n = entry.Key;
+            valueType vType;
+            switch (entry.Value)
+            {
+                case int i:
+                vType = valueType.Int;
+                 info newInfoInt = new info(){infoName = n,valueType = vType,valueInt = i};
+                 infos.Add(newInfoInt);
+                break;
+                case float f:
+                vType = valueType.Float;
+                info newInfoFloat = new info(){infoName = n,valueType = vType,valueFloat = f};
+                 infos.Add(newInfoFloat);
+                break;
+                case string s:
+                vType = valueType.String;
+                info newInfoStr = new info(){infoName = n,valueType = vType,valueString = s};
+                infos.Add(newInfoStr);
+                break;
+            }
         }
     }
 }
