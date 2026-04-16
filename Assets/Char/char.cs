@@ -57,17 +57,10 @@ public class Char
         string strColor(string x,string y) => misc.ColorStr(x,y);
         string log;
         var s = Random.Range(1,3);
-        if (s == 2)
-        {
-            log = $@"A {strColor(name,"yellow")} is currently created. they stats are:
+        log = $@"A {strColor(name,"yellow")} is currently created. they stats are:
             {oColor(nameof(health),health)} | {oColor(nameof(damage),damage)}
             {oColor(nameof(speed),speed)} | {oColor(nameof(attackSpeed),attackSpeed)}
             word wrap is good???";
-        }else
-        {
-            log = $"{misc.SetColor("red")}Go fuck Yourselv{misc.CloseColor()}";
-        }
-         
         return log;
     }
     public void SetHealth(float value)

@@ -32,7 +32,6 @@ public class CharManager : MonoBehaviour
          Char @char = new FactoryChar(classSo).Create(name);
          chars.Add(@char);
          charsView.Add(new CharView{@char = @char, name = name});
-         Debug.Log(chars.Count);
          return @char;
          
     }
