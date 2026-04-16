@@ -6,6 +6,9 @@ public class invCharManager : MonoBehaviour
     public GameObject cardPrefab;
     public void addCardChar(Char @char)
     {
+        GameObject card = Instantiate(cardPrefab,scrollCotent);
+        card.GetComponent<CharCard>().infos = @char.getAllStats();
         
     }
+
 }

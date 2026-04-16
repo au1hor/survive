@@ -24,7 +24,9 @@ public class FactoryChar{
         float damage = SortRangeF(classeSo.damage);
         float speed = SortRangeF(classeSo.speed);
         float attackSpeed = SortRangeF(classeSo.attackSpeed);
+          Debug.Log(health);
         return new Char(name,health,damage,speed,attackSpeed);
+      
     }
 }
 
@@ -42,7 +44,7 @@ public class Char
     public float Speed => speed;
     public float AttackSpeed => attackSpeed;
     public int Level => level;
-    public List<info> infos;
+     List<info> infos= new List<info>();
     public Dictionary<string,object> objs;
     public enum valueType
     {
@@ -50,6 +52,13 @@ public class Char
         Float,
         String
     }
+    public enum ClassType
+    {
+        Assasin,
+        Spada,
+        Warrior
+    }
+    [System.Serializable]
     public struct info
     {
        public string infoName;
@@ -65,6 +74,17 @@ public class Char
         this.damage = damage;
         this.speed = speed;
         this.attackSpeed = attackSpeed;
+        level = Random.Range(0,1000);
+        objs = new Dictionary<string, object>()
+        {
+            {"Name",Name},
+            {"Health",Health},
+            {"Damage",Damage},
+            {"Class",ClassType.Assasin.ToString()},
+            {"Speed",speed},
+            {"AttackSpeed",AttackSpeed},
+            {"Level",Level}
+        };
     }
     public void Death()
     {
@@ -91,40 +111,32 @@ public class Char
             Death();
         }
     }
-    public void getAllStats()
+    public Dictionary<string,object> getAllStats()
     {
-        objs = new Dictionary<string, object>()
-        {
-            {"Name",Name},
-            {"Health",Health},
-            {"Damage",Damage},
-            {"Speed",speed},
-            {"AttackSpeed",AttackSpeed},
-            {"Level",Level}
-        };
         foreach (var entry in objs)
         {
             string n = entry.Key;
-            valueType vType;
+            valueType vType = valueType.Float;
+            info newInfo = new info(){infoName = entry.Key};
             switch (entry.Value)
             {
                 case int i:
                 vType = valueType.Int;
-                 info newInfoInt = new info(){infoName = n,valueType = vType,valueInt = i};
-                 infos.Add(newInfoInt);
+                newInfo.valueInt = i;
                 break;
                 case float f:
                 vType = valueType.Float;
-                info newInfoFloat = new info(){infoName = n,valueType = vType,valueFloat = f};
-                 infos.Add(newInfoFloat);
+                newInfo.valueFloat = f;
                 break;
                 case string s:
                 vType = valueType.String;
-                info newInfoStr = new info(){infoName = n,valueType = vType,valueString = s};
-                infos.Add(newInfoStr);
+                newInfo.valueString = s;
                 break;
             }
+            newInfo.valueType = vType;
+            infos.Add(newInfo);
         }
+        return objs;
     }
 }
 
