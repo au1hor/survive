@@ -12,10 +12,11 @@ public class ClasseSo : ScriptableObject
         Elf
     
     };
-
+    public float ExpoEvo;
     public raceTypeEnum raceType;
     public FloatRange health;
     public FloatRange damage;
     public FloatRange speed;
     public FloatRange attackSpeed;
+    public IntRange level;
 }

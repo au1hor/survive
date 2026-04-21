@@ -18,14 +18,18 @@ public class FactoryChar{
        int result = Random.Range(range.min,range.max);
        return result;
     }
+    public float SetNvDiff(float stats,int nivel)
+    {
+       return stats * Mathf.Pow(1+(0.2f * nivel),classeSo.ExpoEvo);
+    }
     public Char Create(string name)
     {
-        float health = SortRangeF(classeSo.health);
-        float damage = SortRangeF(classeSo.damage);
-        float speed = SortRangeF(classeSo.speed);
-        float attackSpeed = SortRangeF(classeSo.attackSpeed);
-          Debug.Log(health);
-        return new Char(name,health,damage,speed,attackSpeed);
+        int level = SortRangeI(classeSo.level);
+        float health = SetNvDiff(SortRangeF(classeSo.health),level);
+        float damage = SetNvDiff(SortRangeF(classeSo.damage),level);
+        float speed = SetNvDiff(SortRangeF(classeSo.speed),level);
+        float attackSpeed = SetNvDiff(SortRangeF(classeSo.attackSpeed),level);
+        return new Char(name,health,damage,speed,attackSpeed,level);
       
     }
 }
@@ -67,13 +71,14 @@ public class Char
        public float valueFloat;
        public string valueString;
     }
-    public Char(string name, float health, float damage, float speed, float attackSpeed)
+    public Char(string name, float health, float damage, float speed, float attackSpeed,int level)
     {
         this.name = name;
         this.health = health;
         this.damage = damage;
         this.speed = speed;
         this.attackSpeed = attackSpeed;
+        this.level = level;
         level = Random.Range(0,1000);
         objs = new Dictionary<string, object>()
         {
@@ -111,8 +116,9 @@ public class Char
             Death();
         }
     }
-    public Dictionary<string,object> getAllStats()
+    public List<info> getAllStats()
     {
+        infos.Clear();
         foreach (var entry in objs)
         {
             string n = entry.Key;
@@ -136,7 +142,7 @@ public class Char
             newInfo.valueType = vType;
             infos.Add(newInfo);
         }
-        return objs;
+        return infos;
     }
 }
 

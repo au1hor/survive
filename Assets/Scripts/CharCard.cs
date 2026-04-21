@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
-
 public class CharCard : MonoBehaviour
 {
     public GameObject boxNameLv;
@@ -12,38 +10,32 @@ public class CharCard : MonoBehaviour
     public GameObject boxDamage;
     public GameObject boxSpeed;
     public GameObject boxAttackspeed; 
-    public Dictionary<string,object> infos;
+    public List<Char.info> infos;
 
     void Start()
     {
         UpdateUi();
     }
-    public void SetChildTextSimple(GameObject boxStats, object obj)
-    {
-        boxStats.GetComponentInChildren<TMP_Text>().text = $"{obj:F1}";
-    }
-    public void SetChildText(GameObject boxStats,KeyValuePair<string,object> info)
+    public void SetChildText(GameObject boxStats,Char.info info)
     { 
-        
-        if (info.Key == "Name" || info.Key == "Level")
+        if (info.infoName == "Name" || info.infoName == "Level")
         {
-            if (info.Key == "Name")
+            if (info.infoName == "Name")
             {
-                  boxStats.GetComponentInChildren<TMP_Text>().text =info.Value.ToString();
+                  boxStats.GetComponentInChildren<TMP_Text>().text =info.valueString;
                   return;
             }
-            boxStats.GetComponentInChildren<TMP_Text>().text += $" LV: {info.Value:F0}";
+            boxStats.GetComponentInChildren<TMP_Text>().text += $" LV: {info.valueInt:F0}";
         }else
         {
-            SetChildTextSimple(boxStats,info.Value);
+           boxStats.GetComponentInChildren<TMP_Text>().text = $"{info.infoName}: {info.valueFloat:F1}";
         }
-        
     }
     public void UpdateUi()
     {
        foreach (var info in infos)
        {
-        switch (info.Key)
+        switch (info.infoName)
         {
             case "Name" or "Level":
             SetChildText(boxNameLv,info);
@@ -64,7 +56,6 @@ public class CharCard : MonoBehaviour
             SetChildText(boxAttackspeed,info);
             break;
         }
-       
        }
         
     }

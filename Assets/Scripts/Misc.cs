@@ -14,7 +14,6 @@ public class Misc : MonoBehaviour
         {"darkPurple","#2e0e2e"}
 
     };
-    
     public void Awake()
     {
         if (Instance != null && Instance != this)

@@ -25,7 +25,6 @@ public class UiManager : MonoBehaviour
     void Start()
     {
         screenActual = screen.chat;
-
     }
     public Sprite getSpriteByName(string name)
     {
@@ -51,7 +50,6 @@ public class UiManager : MonoBehaviour
     }
      public void changeInvCharIcon()
     {
-        Debug.Log("Pressed");
         if (screenActual != screen.charInv)
         {
             invFullBtn.GetComponent<Image>().sprite = getSpriteByName("InvFull");
@@ -60,7 +58,6 @@ public class UiManager : MonoBehaviour
             screenLog.gameObject.SetActive(false);
             screenActual = screen.charInv;
         }
-        Debug.Log("dont funfa");
     }
     
 

@@ -12,3 +12,4 @@ public class FloatRange
     public float max;
     
 }
+
