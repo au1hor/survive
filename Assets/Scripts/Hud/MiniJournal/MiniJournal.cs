@@ -1,6 +1,8 @@
 using System.Collections;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class MiniJournal : MonoBehaviour
 {
     public GameObject firstNotice;
@@ -14,10 +16,10 @@ public class MiniJournal : MonoBehaviour
     public GameObject MidBall;
     public GameObject LastBall;
     //pos 
-    public Vector2 right;
-    public Vector2 left;
+    public GameObject right;
+    public GameObject mid;
+    public GameObject left;
     // currents 
-    
     public int actualIndex;
     //pivo change
     public Transform Pivot;
@@ -33,12 +35,9 @@ public class MiniJournal : MonoBehaviour
         actualIndex = 1;
         notices = new GameObject[]{secondNotice,firstNotice,thirdNotice};
         balls = new GameObject[]{firstBall,MidBall,LastBall};
-        right = secondNotice.transform.position;
-        left = thirdNotice.transform.position;
     }
     public void changeCurrentNotice(int index)
     {
-       
         if (index != actualIndex)
         {
             balls[index].GetComponent<Image>().sprite = fullBall;
@@ -60,10 +59,6 @@ public class MiniJournal : MonoBehaviour
     }
     public void ChangingNotice(GameObject Notice,int index)
     {
-        /*GameObject temp = sides[0];
-        sides[0] = Notice;
-        sides[actualIndex] = temp; // {0,1,3} {3,1,0}
-        */
         if (AniChangeNotice != null)
         {
             StopCoroutine(AniChangeNotice);
@@ -73,28 +68,40 @@ public class MiniJournal : MonoBehaviour
     IEnumerator AniChange(int index)
     {
         float tempo = 0;
-        notices[index].transform.position = notices[actualIndex].transform.position;
+        actualIndex = index;
+        Vector3 MidPos = mid.transform.position;
+        Vector3[] startsPos = new Vector3[notices.Length];
         while (tempo <= Duration)
         {
-            tempo ++;
-            
+            Vector3 side = left.transform.position;
+            tempo += Time.deltaTime;
+            var t = tempo/Duration;
             for (int i = 0; i < notices.Length; i++)
             {
-                Debug.Log(i);
-                if (i > index)
+                startsPos[i] = notices[i].transform.position;
+            }
+            for (int i = 0; i < notices.Length; i++)
+            {
+                if (i == actualIndex)
                 {
-                    notices[i].transform.position = left;
+                    notices[i].transform.position = Vector3.Lerp(startsPos[i],MidPos,t);
                 }
-                else if (i < index)
+                else
                 {
-                    notices[i].transform.position = right;
+                     if (i > actualIndex)
+                    {
+                        side = left.transform.position;
+                    }else
+                    {
+                        side = right.transform.position;
+                    }
+                    if (notices[i].transform.position != side )
+                    {
+                        notices[i].transform.position = Vector3.Lerp(startsPos[i],side,t);
+                    }
+                      yield return null;
                 }
             }
-            actualIndex = index;
-            yield return null;
         }
-       
     }
-  
-   
 }

@@ -1040,10 +1040,11 @@ MonoBehaviour:
   MidBall: {fileID: 2027481623}
   LastBall: {fileID: 1733639099}
   right: {x: 0, y: 0}
+  mid: {x: 0, y: 0}
   left: {x: 0, y: 0}
   actualIndex: 0
   Pivot: {fileID: 0}
-  Duration: 0
+  Duration: 1
   emptyBall: {fileID: 192766630285091521, guid: 3295419227d4208439f4b4130f0b4e89, type: 3}
   fullBall: {fileID: -1054797130161255058, guid: d2f2d8b180275204c8e6885a7551ef16, type: 3}
 --- !u!114 &1024639405
@@ -1376,8 +1377,8 @@ MonoBehaviour:
     to mark the target and make it bleed based on how many hits it has taken since
     the beginning of the fight.
 
-    "This shit is pretty OP" - comment from an
-    orc who hates very well-done meat.'
+    "This shit is pretty OP" - comment from an orc
+    who hates very well-done meat.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31c66efb511c88642b87065aaea4b582, type: 2}
   m_sharedMaterial: {fileID: -48956748124359348, guid: 31c66efb511c88642b87065aaea4b582, type: 2}
@@ -1759,8 +1760,8 @@ MonoBehaviour:
     - Rare
     monsters have a lower chance of appearing outside of dungeons
 
-    - Normal
-    item drop rate
+    - Normal item
+    drop rate
 
 '
   m_isRightToLeft: 0
