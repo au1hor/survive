@@ -6,6 +6,7 @@ public class ChangeScreenManager : MonoBehaviour
     public Button ExploreButton;
     public GameObject guildHubScreen;
     public GameObject exploreHubScreen;
+    public GameObject shopHubScreen;
 
 
 
