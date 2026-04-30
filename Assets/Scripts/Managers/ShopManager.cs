@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,8 @@ public class ShopManager : MonoBehaviour
     {
         Abc,
         Cost,
-        Type
+        Type,
+        Rarity
 
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -49,6 +51,7 @@ public class ShopManager : MonoBehaviour
           
             newObj.GetComponent<PrefabItemMenu>().textCost.text = $"{it.cost} R$";
             newObj.GetComponent<PrefabItemMenu>().item = it;
+            newObj.GetComponent<PrefabItemMenu>().textRarity.text = it.rarity.ToString().FirstCharacterToUpper();
             prefabsUi.Add(newObj.GetComponent<PrefabItemMenu>());
         }
     }
@@ -58,7 +61,7 @@ public class ShopManager : MonoBehaviour
     "Akira",
     "Hikari","Ren","Yuki","Haruto","Sora","Takumi","Kaito","Ryu","Kenji","Daichi","Shiro","Kazuki","Hiroshi","Takeshi","Isamu","Naoki","Rei","Itsuki","Hayato","Aoi","Hinata","Sakura","Emi","Yuna","Mizuki","Akane","Hana","Kaori","Rin","Nanami","Ayaka","Chika","Asuka","Hotaru","Nozomi","Kohana","Sumire","Mai","Natsuki"
 };
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 1000; i++)
         {
             Item NewItem = new Sword(names[Random.Range(0,names.Length)],2,3,1,Random.Range(100,9999));
             itens.Add(NewItem);
@@ -76,6 +79,9 @@ public class ShopManager : MonoBehaviour
             break;
             case Filters.Type:
             
+            break;
+            case Filters.Rarity:
+            itens = itens.OrderBy(i=>i.raridades[i.rarity]).ToList();
             break;
         }
        for (int i = 0; i < itens.Count; i++)
