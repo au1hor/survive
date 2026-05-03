@@ -12,6 +12,7 @@ public class ShopManager : MonoBehaviour
     public GameObject itemIndPrefab;
     public Scrollbar ShopScrolbar;
     public List<Item> itens = new List<Item>();
+    public List<SwordSo> swordSos;
     public List<PrefabItemMenu> prefabsUi = new List<PrefabItemMenu>();
     public enum Filters
     {
@@ -36,6 +37,9 @@ public class ShopManager : MonoBehaviour
     {
         CreateRandomItens();
         addToLayoutGroup();
+        orgList(Filters.Abc,FiltersScript.Mode.ascending);
+        ShopScrolbar.value = 0.99f;
+       
     }
     public void addToLayoutGroup()
     {
@@ -44,7 +48,7 @@ public class ShopManager : MonoBehaviour
             GameObject newObj =  Instantiate(itemIndPrefab,LayoutGroup.transform);
             TMP_Text textName = newObj.GetComponent<PrefabItemMenu>().textItem;
             textName.text = $"{it.itemName} seesh da silva silva";
-            if (it is Sword sword)
+            if (it is weapon sword)
             {
                 Debug.Log("s");
                 textName.text = $"{sword.itemName} sesh da espada da silva Dmg: {sword.damage} | Rng: {sword.range} | AttSpd: {sword.attackSpeed}";
@@ -67,8 +71,9 @@ public class ShopManager : MonoBehaviour
         };
         for (int i = 0; i < 300; i++)
         {
-            Item NewItem = new Sword(names[Random.Range(0,names.Length)],2,3,1,Random.Range(100,9999));
-            
+            SwordSo so = swordSos[Random.Range(0,swordSos.Count)];
+            Item NewItem = new weapon(so.itemName,so.RangeDamage,so.RangeRange,so.RangeAttackspeed,so.cost);
+            NewItem.raritySetCost();
             itens.Add(NewItem);
         }
     }
@@ -87,7 +92,7 @@ public class ShopManager : MonoBehaviour
        {
          Filters.Abc => itens.OrderBy(i=> i.itemName),
          Filters.Cost => itens.OrderBy(i=> i.cost),
-         Filters.Rarity => itens.OrderBy(i=> RarityTable.raridades[i.rarity]),  
+         Filters.Rarity => itens.OrderBy(i=> RarityTable.rarityItens[i.rarity]),  
          _ => itens
        };
        itens = mode switch
@@ -106,16 +111,26 @@ public class ShopManager : MonoBehaviour
         {
             case 0:
             filtersScript.acualMode =   FiltersScript.Mode.disable;
+            filtersScript.iconArrow.gameObject.SetActive(false);
+            button.GetComponent<TMP_Text>().color = new Color32(0xEC, 0xEA, 0xEA, 0x52);;
             break;
             case 1:
             filtersScript.acualMode =   FiltersScript.Mode.ascending;
+            filtersScript.iconArrow.gameObject.SetActive(true);
+            filtersScript.iconArrow.gameObject.transform.rotation = Quaternion.Euler(0,0,180);
+            filtersScript.iconArrow.GetComponent<Image>().color = Color.green;
+            button.GetComponent<TMP_Text>().color = Color.white;
             break;
             case 2:
             filtersScript.acualMode =   FiltersScript.Mode.descending;
+            filtersScript.iconArrow.gameObject.transform.rotation = Quaternion.Euler(0,0,0);
+            filtersScript.iconArrow.GetComponent<Image>().color = Color.red;
             break;
             default:
             filtersScript.acualMode =   FiltersScript.Mode.disable;
+            filtersScript.iconArrow.gameObject.SetActive(false);
             filtersScript.ind = 0;
+            button.GetComponent<TMP_Text>().color = new Color32(0xEC, 0xEA, 0xEA, 0x52);;
             break;
         }
         var filter = filtersScript.filter;

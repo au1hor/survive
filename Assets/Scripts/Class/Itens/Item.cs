@@ -2,15 +2,28 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum TypeItem
 {
-    sword,
-    doubleSword,
-    longSword,
-    spear,
-    longSpear,
+    weapon, 
+    consumable,
+    tools,
+    acessories,
+    armor,
+
+
+
+}
+public enum TypeWeapons
+{
     dagger,
     doubleDagger,
-    consumable,
-
+    sword,
+    longSword,
+    doubleSword,
+    tripleSword,
+    massiveSword,
+    katanna,
+    doubleKatanna,
+    tripleKatanma,
+    odachi,
 
 }
 public enum Rarity
@@ -25,17 +38,20 @@ public enum Rarity
 }
 public static class RarityTable
 {
-     public static Dictionary<Rarity, float> raridades = new Dictionary<Rarity, float>()
+    public static Dictionary<Rarity, float> rarityItens;
+    public static Dictionary<Rarity, float> rarityMulti;
+    public static void init(RaritysSo raritysSo)
     {
-        {Rarity.common,50},
-        {Rarity.uncommon,20},
-        {Rarity.rare,10},
-        {Rarity.ultraRare, 5},
-        {Rarity.Epic,8},
-        {Rarity.legendary,3.00000009f},
-        {Rarity.unique,0.00000001f}
-    };
+        rarityItens = new Dictionary<Rarity, float>();
+        rarityMulti = new Dictionary<Rarity, float>();
+        for (int i = 0; i < raritysSo.rarities.Count; i++)
+        {
+            rarityItens[raritysSo.rarities[i]] = raritysSo.Chances[i];
+            rarityMulti[raritysSo.rarities[i]] = raritysSo.Multi[i];
+        }
+    }
 }
+
 public class Item
 {
     public string itemName;
@@ -46,13 +62,13 @@ public class Item
     public Rarity sortRarity()
     {
         float total = 0;
-        foreach (var item in RarityTable.raridades)
+        foreach (var item in RarityTable.rarityItens)
         {
             total += item.Value;
         }
         float rng = Random.Range(0,total);
         float ac = 0;
-        foreach (var item in RarityTable.raridades)
+        foreach (var item in RarityTable.rarityItens)
         {
             ac+=item.Value;
             if (ac >= rng)
@@ -62,27 +78,31 @@ public class Item
         }
         return Rarity.common;
     }
-    public Item(string itemName, TypeItem typeItem, float cost)
+    public void raritySetCost()
+    {
+        this.cost *= RarityTable.rarityMulti[this.rarity];
+    }
+    public Item(string itemName, TypeItem typeItem, Vector2 cost)
     {
         this.itemName = itemName;
         this.typeItem = typeItem;
-        this.cost = cost;
         this.rarity = sortRarity();
-
+        this.cost = Random.Range(cost.x,cost.y);
+       
     }
-
 }
-public class Sword:Item
+public class weapon:Item
 {
+    public TypeWeapons typeWeapon;
     public float damage;
     public float range;
     public float attackSpeed;
-    public Sword(string itemName,float damage, float range, float attackSpeed,float cost)
-    :base(itemName,TypeItem.sword,cost)
+    public weapon(string itemName,Vector2 rangeDamage, Vector2 rangeRange, Vector2 rangeAttackSpeed,Vector2 cost)
+    :base(itemName,TypeItem.weapon,cost)
     {
-        this.damage = damage;
-        this.range = range;
-        this.attackSpeed = attackSpeed;
+        this.damage = Random.Range(rangeDamage.x,rangeDamage.y) ;
+        this.range = Random.Range(rangeRange.x,rangeRange.y);
+        this.attackSpeed = Random.Range(rangeAttackSpeed.x,rangeAttackSpeed.y);
         
     }
 
