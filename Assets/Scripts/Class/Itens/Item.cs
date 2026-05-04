@@ -108,3 +108,13 @@ public class weapon:Item
 
 
 }
+public class Food : Item
+{
+    public float satiety;
+    public int amount;
+    public Food(string intemName,float satiety,int amount,Vector2 cost) : base(intemName, TypeItem.consumable, cost)
+    {
+        this.satiety = satiety;
+        this.amount = amount;
+    }
+}

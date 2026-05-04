@@ -12,7 +12,7 @@ public class ShopManager : MonoBehaviour
     public GameObject itemIndPrefab;
     public Scrollbar ShopScrolbar;
     public List<Item> itens = new List<Item>();
-    public List<SwordSo> swordSos;
+    public List<weapon> swordSos;
     public List<PrefabItemMenu> prefabsUi = new List<PrefabItemMenu>();
     public enum Filters
     {
@@ -22,6 +22,14 @@ public class ShopManager : MonoBehaviour
         Rarity
 
     }
+    public Dictionary<TypeItem, float> chanceRandomItens = new Dictionary<TypeItem, float>()
+    {
+        {TypeItem.consumable, 25f},
+        {TypeItem.tools,25f},
+        {TypeItem.acessories,15f},
+        {TypeItem.armor, 15f},
+        {TypeItem.weapon,20f}
+    };
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Awake()
     {
@@ -54,7 +62,7 @@ public class ShopManager : MonoBehaviour
                 textName.text = $"{sword.itemName} sesh da espada da silva Dmg: {sword.damage} | Rng: {sword.range} | AttSpd: {sword.attackSpeed}";
             }
             newObj.name = it.rarity.ToString();
-            newObj.GetComponent<PrefabItemMenu>().textCost.text = $"{it.cost} R$";
+            newObj.GetComponent<PrefabItemMenu>().textCost.text = $"{it.cost:f1} R$";
             newObj.GetComponent<PrefabItemMenu>().item = it;
             newObj.GetComponent<PrefabItemMenu>().textRarity.text = it.rarity.ToString().FirstCharacterToUpper();
             prefabsUi.Add(newObj.GetComponent<PrefabItemMenu>());
@@ -62,21 +70,34 @@ public class ShopManager : MonoBehaviour
     }
     public void CreateRandomItens()
     {
-        string[] names = {
-            "Akira","Hikari","Ren","Yuki","Haruto","Sora","Takumi",
-            "Kaito","Ryu","Kenji","Daichi","Shiro","Kazuki","Hiroshi",
-            "Takeshi","Isamu","Naoki","Rei","Itsuki","Hayato","Aoi","Hinata",
-            "Sakura","Emi","Yuna","Mizuki","Akane","Hana","Kaori","Rin","Nanami",
-            "Ayaka","Chika","Asuka","Hotaru","Nozomi","Kohana","Sumire","Mai","Natsuki"
-        };
+        TypeItem typeItem = TypeItem.consumable;
         for (int i = 0; i < 300; i++)
         {
-            SwordSo so = swordSos[Random.Range(0,swordSos.Count)];
-            Item NewItem = new weapon(so.itemName,so.RangeDamage,so.RangeRange,so.RangeAttackspeed,so.cost);
-            NewItem.raritySetCost();
-            itens.Add(NewItem);
+             float total = 0;
+        foreach (var item in chanceRandomItens)
+        {
+            total += item.Value;
         }
+        float accm = 0;
+        foreach (var item in chanceRandomItens)
+        {
+            accm += Random.Range(0,total);
+            if (accm > item.Value)
+            {
+                typeItem = item.Key;
+                return;
+            }
+        }
+        string nome = lists.nomes[Random.Range(0,lists.nomes.Count)];
+        Item query = typeItem switch
+        {
+           
+            _ => new Food(nome,Random.Range(0,2.3f),Random.Range(0,64),new Vector2(0,120)),
+        };
+        }
+       
     }
+  
     public void OrganizeItens()
     {   
        for (int i = 0; i < itens.Count; i++)

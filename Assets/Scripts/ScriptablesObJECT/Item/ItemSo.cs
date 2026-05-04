@@ -8,20 +8,22 @@ public class ItemSo : ScriptableObject
     
 }
 [CreateAssetMenu(fileName = "FoodSo", menuName = "Scriptable Objects/FoodSo")]
-public class Food : ItemSo
+public class FoodSo : ItemSo
 {
     public TypeItem typeItem = TypeItem.consumable;
+    public int amount;
     public float satiety;
-    //pro futuro estado ce ta podre ou etc
+    //pro futuro estado c
+    // e ta podre ou etc
 }
-[CreateAssetMenu(fileName ="SwordSo", menuName ="Scriptable Objects/SwordSo")]
-public class SwordSo : ItemSo
+[CreateAssetMenu(fileName ="WeaponSo", menuName ="Scriptable Objects/WeaponSo")]
+public class WeaponSo : ItemSo
 {
     public TypeItem typeItem = TypeItem.weapon;
     public TypeWeapons typeWeapon= TypeWeapons.sword;
     public string creatorName;
     public Vector2 RangeDamage;
     public Vector2 RangeRange;
-    public Vector2 RangeAttackspeed;
+    public Vector2 RangeBaseWeight;
     
 }
