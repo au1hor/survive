@@ -11,6 +11,7 @@ public class ItemSo : ScriptableObject
 public class FoodSo : ItemSo
 {
     public TypeItem typeItem = TypeItem.consumable;
+    public Rarity rarity;
     public int amount;
     public float satiety;
     //pro futuro estado c

@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083e710bde19fe740a53eb62fdbeea71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FiltersScript
-  acualMode: 0
+  actualMode: 0
   ind: 0
   iconArrow: {fileID: 297689089}
   filter: 1
@@ -1313,7 +1313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083e710bde19fe740a53eb62fdbeea71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FiltersScript
-  acualMode: 0
+  actualMode: 0
   ind: 0
   iconArrow: {fileID: 1934881946}
   filter: 3
@@ -3528,6 +3528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1129010615}
   - component: {fileID: 1129010614}
+  - component: {fileID: 1129010616}
   m_Layer: 0
   m_Name: Manager---Shop
   m_TagString: Untagged
@@ -3547,13 +3548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d34a414c68b9e84a8363dc5fc55019f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
-  LayoutGroup: {fileID: 1257196135}
-  itemIndPrefab: {fileID: 4229447992036671821, guid: 620a52e5758934844bc1e4922c9c4fc4, type: 3}
-  ShopScrolbar: {fileID: 1179153945}
-  swordSos:
-  - {fileID: 11400000, guid: 364b39a32e2009b4083983b015c01c72, type: 2}
-  - {fileID: 11400000, guid: 32826e908f56fcf48a296539a6b70904, type: 2}
-  prefabsUi: []
+  shopManagerUi: {fileID: 1129010616}
 --- !u!4 &1129010615
 Transform:
   m_ObjectHideFlags: 0
@@ -3569,6 +3564,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1129010616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129010613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164880ed12ad8594fb39877941c6d23b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopManagerUi
+  shopManager: {fileID: 0}
+  itemIndPrefab: {fileID: 4229447992036671821, guid: 620a52e5758934844bc1e4922c9c4fc4, type: 3}
+  ShopScrolbar: {fileID: 1179153945}
+  LayoutGroup: {fileID: 1257196135}
+  prefabsUi: []
+  buttons:
+  - {fileID: 385062407}
+  - {fileID: 1993013681}
+  - {fileID: 52616218}
 --- !u!1 &1179153944
 GameObject:
   m_ObjectHideFlags: 0
@@ -3842,6 +3858,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameLoader
   itensRarityData: {fileID: 11400000, guid: b861764103e58e0478564cac5355ef98, type: 2}
+  chanceTypeItemData: {fileID: 11400000, guid: e19e3c57f7ac75e4f83d44567bae726d, type: 2}
+  weaponData: {fileID: 11400000, guid: 51b35517ed0cb4b46bf510330e15d335, type: 2}
+  foodData: {fileID: 11400000, guid: a3700ce09f5dffa41a2eeb6e0c00ac75, type: 2}
 --- !u!4 &1262537547
 Transform:
   m_ObjectHideFlags: 0
@@ -5812,7 +5831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083e710bde19fe740a53eb62fdbeea71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FiltersScript
-  acualMode: 0
+  actualMode: 0
   ind: 1
   iconArrow: {fileID: 1632471482}
   filter: 0

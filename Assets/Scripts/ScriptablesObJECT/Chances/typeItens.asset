@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14665a6ae2d04a2498f5682feac0a3d5, type: 3}
   m_Name: typeItens
   m_EditorClassIdentifier: Assembly-CSharp::chanceTypesSo
-  typesItem: 
-  Chance: []
+  typesItem: 0000000001000000020000000300000004000000
+  Chance:
+  - 100
+  - 0
+  - 0
+  - 0
+  - 0

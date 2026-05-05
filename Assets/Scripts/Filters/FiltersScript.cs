@@ -7,10 +7,9 @@ public class FiltersScript : MonoBehaviour
     {
         ascending,
         descending,
-        disable,
 
     }
-    public Mode acualMode;
+    public Mode actualMode;
     public int ind = 0;
     ShopManager shopManager;
     public Image iconArrow;

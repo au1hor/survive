@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: "P\xE3o"
   m_EditorClassIdentifier: Assembly-CSharp::FoodSo
-  itemName: 
+  itemName: "P\xE3o"
   cost: {x: 0, y: 0}
   typeItem: 1
+  rarity: 0
   amount: 0
-  satiety: 0
+  satiety: 12
