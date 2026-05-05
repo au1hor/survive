@@ -13,6 +13,7 @@ public class ShopManager : MonoBehaviour
     public Scrollbar ShopScrolbar;
     public List<Item> itens = new List<Item>();
     public List<weapon> swordSos;
+    public GameLoader gameLoader;
     public List<PrefabItemMenu> prefabsUi = new List<PrefabItemMenu>();
     public enum Filters
     {
@@ -21,16 +22,7 @@ public class ShopManager : MonoBehaviour
         Type,
         Rarity
 
-    }
-    public Dictionary<TypeItem, float> chanceRandomItens = new Dictionary<TypeItem, float>()
-    {
-        {TypeItem.consumable, 25f},
-        {TypeItem.tools,25f},
-        {TypeItem.acessories,15f},
-        {TypeItem.armor, 15f},
-        {TypeItem.weapon,20f}
     };
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Awake()
     {
         if (Instance != null && Instance !=this)
@@ -56,10 +48,15 @@ public class ShopManager : MonoBehaviour
             GameObject newObj =  Instantiate(itemIndPrefab,LayoutGroup.transform);
             TMP_Text textName = newObj.GetComponent<PrefabItemMenu>().textItem;
             textName.text = $"{it.itemName} seesh da silva silva";
+            string prefix = lists.prefixos[Random.Range(0,lists.prefixos.Count)];
+            string sufix = lists.sufixos[Random.Range(0,lists.sufixos.Count)];
             if (it is weapon sword)
             {
                 Debug.Log("s");
-                textName.text = $"{sword.itemName} sesh da espada da silva Dmg: {sword.damage} | Rng: {sword.range} | AttSpd: {sword.attackSpeed}";
+                textName.text = $"{prefix} {sword.itemName} {sufix} {sword.damage} | Rng: {sword.range}";
+            }else if(it is Food food)
+            {
+                 textName.text = $"{food.itemName}x{food.amount} | saicety: {food.satiety}";
             }
             newObj.name = it.rarity.ToString();
             newObj.GetComponent<PrefabItemMenu>().textCost.text = $"{it.cost:f1} R$";
@@ -68,34 +65,38 @@ public class ShopManager : MonoBehaviour
             prefabsUi.Add(newObj.GetComponent<PrefabItemMenu>());
         }
     }
-    public void CreateRandomItens()
+    public TypeItem sortType()
     {
-        TypeItem typeItem = TypeItem.consumable;
-        for (int i = 0; i < 300; i++)
-        {
-             float total = 0;
-        foreach (var item in chanceRandomItens)
+        float total = 0;
+        foreach (var item in chanceTypeItem.chanceItens)
         {
             total += item.Value;
         }
-        float accm = 0;
-        foreach (var item in chanceRandomItens)
+        float rng = Random.Range(0,total);
+        float acc = 0;
+        foreach (var item in chanceTypeItem.chanceItens)
         {
-            accm += Random.Range(0,total);
-            if (accm > item.Value)
+            acc += item.Value;
+            if (rng > acc)
             {
-                typeItem = item.Key;
-                return;
+                return item.Key;
             }
         }
+        return TypeItem.weapon;
+    }
+    public void CreateRandomItens()
+    {
+       for (int i = 0; i < 300; i++)
+       {
         string nome = lists.nomes[Random.Range(0,lists.nomes.Count)];
-        Item query = typeItem switch
+        TypeItem type = sortType();
+        Item item = type switch
         {
-           
-            _ => new Food(nome,Random.Range(0,2.3f),Random.Range(0,64),new Vector2(0,120)),
-        };
-        }
-       
+            TypeItem.consumable => new Food(gameLoader.foodData.itemName,gameLoader.foodData.satiety,gameLoader.foodData.amount),
+             _ =>  new weapon(gameLoader.weaponData.itemName,gameLoader.weaponData.RangeDamage,gameLoader.weaponData.RangeRange)
+        };  
+        itens.Add(item);
+       }
     }
   
     public void OrganizeItens()

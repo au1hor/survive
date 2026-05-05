@@ -7,9 +7,6 @@ public enum TypeItem
     tools,
     acessories,
     armor,
-
-
-
 }
 public enum TypeWeapons
 {
@@ -51,6 +48,18 @@ public static class RarityTable
         }
     }
 }
+public static class chanceTypeItem
+{
+    public static Dictionary<TypeItem,float> chanceItens;
+    public static void init(chanceTypesSo typesChance)
+    {
+        chanceItens = new Dictionary<TypeItem, float>();
+        for (int i = 0; i < typesChance.typesItem.Count; i++)
+        {
+            chanceItens[typesChance.typesItem[i]] = typesChance.Chance[i];
+        }
+    }
+}
 
 public class Item
 {
@@ -82,12 +91,11 @@ public class Item
     {
         this.cost *= RarityTable.rarityMulti[this.rarity];
     }
-    public Item(string itemName, TypeItem typeItem, Vector2 cost)
+    public Item(string itemName, TypeItem typeItem)
     {
         this.itemName = itemName;
         this.typeItem = typeItem;
         this.rarity = sortRarity();
-        this.cost = Random.Range(cost.x,cost.y);
        
     }
 }
@@ -96,23 +104,20 @@ public class weapon:Item
     public TypeWeapons typeWeapon;
     public float damage;
     public float range;
-    public float attackSpeed;
-    public weapon(string itemName,Vector2 rangeDamage, Vector2 rangeRange, Vector2 rangeAttackSpeed,Vector2 cost)
-    :base(itemName,TypeItem.weapon,cost)
+
+    public weapon(string itemName,Vector2 rangeDamage, Vector2 rangeRange)
+    :base(itemName,TypeItem.weapon)
     {
         this.damage = Random.Range(rangeDamage.x,rangeDamage.y) ;
-        this.range = Random.Range(rangeRange.x,rangeRange.y);
-        this.attackSpeed = Random.Range(rangeAttackSpeed.x,rangeAttackSpeed.y);
-        
+        this.range = Random.Range(rangeRange.x,rangeRange.y);   
     }
-
-
 }
 public class Food : Item
 {
     public float satiety;
     public int amount;
-    public Food(string intemName,float satiety,int amount,Vector2 cost) : base(intemName, TypeItem.consumable, cost)
+    public Food(string intemName,float satiety,int amount)
+    :base(intemName, TypeItem.consumable)
     {
         this.satiety = satiety;
         this.amount = amount;

@@ -10,13 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Espada De madeira
-  m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  m_Name: "P\xE3o"
+  m_EditorClassIdentifier: Assembly-CSharp::FoodSo
   itemName: 
   cost: {x: 0, y: 0}
-  typeItem: 0
-  typeWeapon: 2
-  creatorName: 
-  RangeDamage: {x: 0, y: 0}
-  RangeRange: {x: 0, y: 0}
-  RangeBaseWeight: {x: 0, y: 0}
+  typeItem: 1
+  amount: 0
+  satiety: 0
