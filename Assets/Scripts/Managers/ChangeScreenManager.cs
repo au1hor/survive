@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ChangeScreenManager : MonoBehaviour
@@ -14,5 +15,9 @@ public class ChangeScreenManager : MonoBehaviour
     {
         guildHubScreen.gameObject.SetActive(false);
         exploreHubScreen.gameObject.SetActive(true);
+    }
+    public void goToBattleScene()
+    {
+        SceneManager.LoadScene("battleScene");
     }
 }
