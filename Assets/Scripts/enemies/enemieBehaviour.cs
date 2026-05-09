@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class enemieBehaviour : MonoBehaviour
 {
-    states currentState = states.chilling;
+    public states currentState = states.chilling;
     SpriteRenderer spriteRenderer;
     Color currentColor = Color.white;
     enemieStats enemieStats;
@@ -21,22 +21,27 @@ public class enemieBehaviour : MonoBehaviour
         enemieStats = this.GetComponent<enemieStats>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         changingState(states.chilling);
-        InvokeRepeating(nameof(checkEnemies),0,0.5f);
+        InvokeRepeating(nameof(checkEnemies),0,0.2f);
        
     }
     public void Update()
     {
-        if (magnDist <= enemieStats.vision && player != null)
+        if ( currentState == states.chasing && player != null)
         {
             Debug.Log(magnDist);
             Vector2 dist = (player.transform.position-  transform.position ).normalized;
             rb.linearVelocity =dist* enemieStats.speed;
         }
-          
+        else
+        {
+            rb.linearVelocity = Vector2.zero;
+        }     
     }
     public void checkEnemies()
-    {
-        Debug.Log("Checkando");
+    {    if (player == null)
+        {
+            changingState(states.chilling);
+        }
         RaycastHit2D[] enemies = Physics2D.CircleCastAll(transform.position,enemieStats.vision,Vector2.zero);
         if (enemies.Length >0 && enemies[0].collider != null)
         {
@@ -46,9 +51,17 @@ public class enemieBehaviour : MonoBehaviour
                 {
                     player = item.collider.gameObject;
                     magnDist = (this.gameObject.transform.position - player.transform.position).magnitude;
-                    changingState(states.chasing);
-                    Debug.Log("Encontrado");
+                    if (magnDist <= enemieStats.reach && currentState!=states.attacking)
+                    {
+                        changingState(states.attacking);
+                        return;
+                    }else if (magnDist >enemieStats.reach)
+                    {
+                        changingState(states.chasing);
+                          return;
+                    }
                 }
+                player = null;
             }
         }
     }
@@ -57,16 +70,17 @@ public class enemieBehaviour : MonoBehaviour
         chilling,
         walkChiling,
         chasing,
+        attacking,
         hitted
     }
-    
     public void changingState(states state)
     {
-        Action changing = state switch
+        Action changing = state switch // eu acho que n precisa disso mais achei dahora
         {
             states.chilling => toChill,
             states.walkChiling => toWalk,
             states.chasing =>toChase,
+            states.attacking => toAtack,
             states.hitted => toHitted,
             _ => toChill
 
@@ -75,20 +89,40 @@ public class enemieBehaviour : MonoBehaviour
     }
     public void toChill()
     {
-      currentColor = spriteRenderer.color = Color.blue;
+        currentState = states.chilling;
+        currentColor = spriteRenderer.color = Color.blue;
+        rb.linearVelocity = Vector2.zero;
     }
     public void toWalk()
-    {
-         currentColor = spriteRenderer.color = Color.yellowGreen;
+    {   
+        currentState = states.walkChiling;
+        currentColor = spriteRenderer.color = Color.yellowGreen;
     }
     public void toChase()
     { 
+        currentState = states.chasing;    
         currentColor = spriteRenderer.color = Color.orangeRed;
+    }
+    Coroutine AttackAni;
+    public void toAtack()
+    { 
+        currentState = states.attacking;    
+        currentColor = spriteRenderer.color = Color.purple;
+        if (AttackAni != null)
+        {
+            StopCoroutine(AttackAni);
+        }
+        AttackAni = StartCoroutine(attackingAni());
+    }
+    IEnumerator attackingAni()
+    {
+        player.GetComponent<PlayerStats>().changeLife(-10);
+        yield return null;
     }
     Coroutine getHittedAni;
     public void toHitted()
     {
-        
+        currentState = states.hitted;
         if (getHittedAni != null)
         {
             StopCoroutine(getHittedAni);

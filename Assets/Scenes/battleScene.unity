@@ -390,7 +390,7 @@ Transform:
   m_GameObject: {fileID: 1080252340}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.86, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -437,7 +437,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   speed: 10
   damage: 0
-  life: 0
+  life: 200
+  gold: 0
+  xp: 0
 --- !u!114 &1080252347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,7 +681,7 @@ Transform:
   m_GameObject: {fileID: 1602185166}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.256, y: 0.181, z: 0}
+  m_LocalPosition: {x: 5.77, y: 0.16, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -697,6 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c231559b7094a347adaaa18b0f09d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemieBehaviour
+  currentState: 0
   player: {fileID: 0}
   magnDist: 0
 --- !u!114 &1602185172
@@ -712,9 +715,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemieStats
   enemieBehaviour: {fileID: 1602185171}
+  PlayerStats: {fileID: 0}
   life: 100
   speed: 3
-  vision: 8.77
+  reach: 1
+  xpCarry: 10
+  goldCarry: 10
+  vision: 3
 --- !u!1 &1792584537
 GameObject:
   m_ObjectHideFlags: 0

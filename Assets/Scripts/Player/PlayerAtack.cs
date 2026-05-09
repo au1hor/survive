@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class PlayerAtack : MonoBehaviour
@@ -14,6 +15,9 @@ public class PlayerAtack : MonoBehaviour
         {
             Debug.Log("Dont find any enemies");
             return;
+        }else
+        {
+            Debug.Log(enemie);
         }
         GameObject slash = Instantiate(atackPrefab,enemie.transform.position,Quaternion.identity);
         if (animAtack != null)
@@ -26,12 +30,25 @@ public class PlayerAtack : MonoBehaviour
     }
     public GameObject searchForEnemies()
     {
-        RaycastHit2D[] sesh = Physics2D.CircleCastAll(transform.position,10f,Vector2.zero);
-        if (sesh[0].collider != null && sesh.Length != 0)
-        {
-            return sesh[0].collider.gameObject;
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Debug.Log(mousePos);
+        RaycastHit2D[] sesh = Physics2D.CircleCastAll(mousePos,3f,Vector2.zero);
+        int minDist = 0;
+        float currentDist = Mathf.Infinity; 
+        for (int i = 0; i < sesh.Length; i++)
+        {   
+            if (sesh[i].collider.tag != "Player" && sesh[i].collider.tag != null)
+            {   
+                GameObject obj = sesh[i].collider.gameObject;
+                float dist = (mousePos - (Vector2)obj.transform.position).magnitude;
+                if (dist < currentDist)
+                {
+                    currentDist = dist;
+                    minDist = i;
+                }
+            }
         }
-        return null;
+        return sesh[minDist].collider.gameObject;
     }
     public IEnumerator slashAnimation(GameObject slash)
     {

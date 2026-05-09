@@ -6,6 +6,9 @@ public class PlayerStats : MonoBehaviour
     public float speed;
     public float damage;
     public float life;
+    //moneys and xp
+    public float gold;
+    public float xp;
     void Awake()
     {
         if (instance != null && instance != this)
@@ -15,6 +18,18 @@ public class PlayerStats : MonoBehaviour
         {
             instance = this;
         }
+    }
+    public void changeLife(float value)
+    {
+        life += value;
+        if (life <= 0)
+        {
+            death();
+        }
+    }
+    public void death()
+    {
+        Destroy(this.gameObject);
     }
 
 }
