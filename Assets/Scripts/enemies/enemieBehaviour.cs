@@ -12,13 +12,15 @@ public class enemieBehaviour : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Color currentColor = Color.white;
     enemieStats enemieStats;
+    enemieUi enemieUi;
     public GameObject player;
     public float magnDist;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     void Start()
     {   
         rb = this.GetComponent<Rigidbody2D>();
         enemieStats = this.GetComponent<enemieStats>();
+        enemieUi = GetComponent<enemieUi>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         changingState(states.chilling);
         InvokeRepeating(nameof(checkEnemies),0,0.2f);
@@ -26,16 +28,21 @@ public class enemieBehaviour : MonoBehaviour
     }
     public void Update()
     {
-        if ( currentState == states.chasing && player != null)
+       move();
+    }
+    public void move()
+    {
+         if ( currentState == states.chasing && player != null)
         {
-            Debug.Log(magnDist);
             Vector2 dist = (player.transform.position-  transform.position ).normalized;
+            Debug.Log(dist);
             rb.linearVelocity =dist* enemieStats.speed;
         }
         else
         {
             rb.linearVelocity = Vector2.zero;
-        }     
+        }
+        enemieUi.changeSprMove(rb.linearVelocity);     
     }
     public void checkEnemies()
     {    if (player == null)
@@ -90,24 +97,24 @@ public class enemieBehaviour : MonoBehaviour
     public void toChill()
     {
         currentState = states.chilling;
-        currentColor = spriteRenderer.color = Color.blue;
+        //currentColor = spriteRenderer.color = Color.blue;
         rb.linearVelocity = Vector2.zero;
     }
     public void toWalk()
     {   
         currentState = states.walkChiling;
-        currentColor = spriteRenderer.color = Color.yellowGreen;
+        //currentColor = spriteRenderer.color = Color.yellowGreen;
     }
     public void toChase()
     { 
         currentState = states.chasing;    
-        currentColor = spriteRenderer.color = Color.orangeRed;
+       // currentColor = spriteRenderer.color = Color.orangeRed;
     }
     Coroutine AttackAni;
     public void toAtack()
     { 
         currentState = states.attacking;    
-        currentColor = spriteRenderer.color = Color.purple;
+        //currentColor = spriteRenderer.color = Color.purple;
         if (AttackAni != null)
         {
             StopCoroutine(AttackAni);
@@ -131,7 +138,6 @@ public class enemieBehaviour : MonoBehaviour
     }
     IEnumerator getHitted()
     {
-        Debug.Log("tyetet");
         spriteRenderer.color = Color.white;
         yield return new WaitForSeconds(0.15f);
         spriteRenderer.color = currentColor;

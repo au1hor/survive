@@ -15,9 +15,6 @@ public class PlayerAtack : MonoBehaviour
         {
             Debug.Log("Dont find any enemies");
             return;
-        }else
-        {
-            Debug.Log(enemie);
         }
         GameObject slash = Instantiate(atackPrefab,enemie.transform.position,Quaternion.identity);
         if (animAtack != null)
@@ -31,7 +28,6 @@ public class PlayerAtack : MonoBehaviour
     public GameObject searchForEnemies()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        Debug.Log(mousePos);
         RaycastHit2D[] sesh = Physics2D.CircleCastAll(mousePos,3f,Vector2.zero);
         int minDist = 0;
         float currentDist = Mathf.Infinity; 
@@ -47,6 +43,10 @@ public class PlayerAtack : MonoBehaviour
                     minDist = i;
                 }
             }
+        }
+        if (sesh.Length == 0 || sesh[minDist].collider.gameObject.tag == "Player" )
+        {
+            return null;
         }
         return sesh[minDist].collider.gameObject;
     }
