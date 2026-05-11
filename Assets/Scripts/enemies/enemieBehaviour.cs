@@ -138,7 +138,7 @@ public class enemieBehaviour : MonoBehaviour
     }
     IEnumerator getHitted()
     {
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(0.15f);
         spriteRenderer.color = currentColor;
 

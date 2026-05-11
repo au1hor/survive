@@ -9,6 +9,9 @@ public class PlayerStats : MonoBehaviour
     //moneys and xp
     public float gold;
     public float xp;
+    public int actualSlot;
+    public int playerSlot = 5;
+    public GameObject[] weapons;
     void Awake()
     {
         if (instance != null && instance != this)

@@ -16,6 +16,11 @@ public class ChangeScreenManager : MonoBehaviour
         guildHubScreen.gameObject.SetActive(false);
         exploreHubScreen.gameObject.SetActive(true);
     }
+    public void ShopClick()
+    {
+        guildHubScreen.gameObject.SetActive(false);
+        shopHubScreen.gameObject.SetActive(true);
+    }
     public void goToBattleScene()
     {
         SceneManager.LoadScene("battleScene");
