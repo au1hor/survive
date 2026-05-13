@@ -60,12 +60,12 @@ public static class chanceTypeItem
         }
     }
 }
-
 public class Item
 {
     public string itemName;
     public TypeItem typeItem;
     public Rarity rarity;
+    public Sprite spriteIcon;
     public float cost;
     Rarity sortRarity()
     {
@@ -139,11 +139,20 @@ public class weapon:Item
     public TypeWeapons typeWeapon;
     public float damage;
     public float range;
+    public float weight;
+    public void setStats(float damage,float range,float weight,float cost)
+    {
+        this.damage = damage;
+        this.range = range;
+        this.weight = weight;
+        this.cost = cost;
+    }
     public void setByArangeStats()
     {
         WeaponSo wSo = GameLoader.Instance.weaponData;
         this.damage = Random.Range(wSo.RangeDamage.x,wSo.RangeDamage.y);
         this.range = Random.Range(wSo.RangeRange.x,wSo.RangeRange.y);
+        this.weight = Random.Range(wSo.RangeBaseWeight.x,wSo.RangeBaseWeight.y);
     }
     public void aplyRarityMulti()
     {
@@ -164,5 +173,10 @@ public class Food : Item
     :base(intemName)
     {
         this.typeItem = TypeItem.consumable;
+    }
+    public void setStatus(float satiety,int amount)
+    {
+        this.satiety = satiety;
+        this.amount = amount;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -10,8 +11,8 @@ public class PlayerStats : MonoBehaviour
     public float gold;
     public float xp;
     public int actualSlot;
-    public int playerSlot = 5;
-    public GameObject[] weapons;
+    public int playerSlots = 5;
+    public Dictionary<int,Item>Inventory = new Dictionary<int, Item>();
     void Awake()
     {
         if (instance != null && instance != this)
@@ -21,6 +22,10 @@ public class PlayerStats : MonoBehaviour
         {
             instance = this;
         }
+    }
+    void Start()
+    {
+        
     }
     public void changeLife(float value)
     {

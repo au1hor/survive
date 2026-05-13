@@ -4,6 +4,7 @@ using UnityEngine;
 public class ItemSo : ScriptableObject
 {
     public string itemName;
+    public Sprite spriteIcon;
     public Vector2 cost;
     
 }

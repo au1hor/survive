@@ -3904,8 +3904,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameLoader
   itensRarityData: {fileID: 11400000, guid: b861764103e58e0478564cac5355ef98, type: 2}
   chanceTypeItemData: {fileID: 11400000, guid: e19e3c57f7ac75e4f83d44567bae726d, type: 2}
-  weaponData: {fileID: 11400000, guid: 51b35517ed0cb4b46bf510330e15d335, type: 2}
-  foodData: {fileID: 11400000, guid: a3700ce09f5dffa41a2eeb6e0c00ac75, type: 2}
+  weaponData: {fileID: 11400000, guid: fef4ad8c864c04347ba927215c94243a, type: 2}
+  foodData: {fileID: 11400000, guid: bd915953079ed7349a8485d668fdb4a0, type: 2}
 --- !u!4 &1262537547
 Transform:
   m_ObjectHideFlags: 0

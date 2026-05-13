@@ -5,29 +5,32 @@ using UnityEngine.InputSystem;
 public class PlayerControler : MonoBehaviour
 {
     public InputActionReference slashAtack;
-    public InputActionReference numberKey;
     public inventoryManager inventoryManager;
     public PlayerAtack playerAtack;
+    void Update()
+    {
+        if (Input.inputString!= "")
+        {
+            if (int.TryParse(Input.inputString,out int value))
+            {
+                changeSlot(value);
+            }
+        }
+    }
     void OnEnable()
     {
         slashAtack.action.started += Slash;
-        numberKey.action.started += OnTap;
     }
     void OnDisable()
     {
           slashAtack.action.started -= Slash;
-           numberKey.action.started -= OnTap;
+    }
+    public void changeSlot(int value)
+    {
+        inventoryManager.selectSlot(value);
     }
     private void Slash(InputAction.CallbackContext obj)
     {
         playerAtack.slashAtack();
-    }
-    public void OnTap(InputAction.CallbackContext context)
-    {
-        string keyname = context.control.name;
-        if (int.TryParse(keyname,out int value))
-        {
-            inventoryManager.selectSlot(value);
-        }
     }
 }

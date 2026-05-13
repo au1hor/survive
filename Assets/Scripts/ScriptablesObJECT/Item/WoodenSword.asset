@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Espada
+  m_Name: WoodenSword
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSo
-  itemName: Espada
+  itemName: Wooden Sword
+  spriteIcon: {fileID: 6773952795744817372, guid: bf2feb6f8503d5146b42788fb512e0ed, type: 3}
   cost: {x: 0, y: 0}
   typeItem: 0
   typeWeapon: 2
-  creatorName: 
-  RangeDamage: {x: 6, y: 12}
-  RangeRange: {x: 1, y: 3}
-  RangeBaseWeight: {x: 0, y: 0}
+  creatorName: World
+  RangeDamage: {x: 0, y: 3}
+  RangeRange: {x: 1, y: 1}
+  RangeBaseWeight: {x: 700, y: 700}

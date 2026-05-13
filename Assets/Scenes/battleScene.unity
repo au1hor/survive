@@ -554,8 +554,7 @@ MonoBehaviour:
   gold: 0
   xp: 0
   actualSlot: 0
-  playerSlot: 5
-  weapons: []
+  playerSlots: 5
 --- !u!114 &1080252347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,7 +587,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControler
   slashAtack: {fileID: -8154108798746919089, guid: 2f9d56446a70fdf4abd03139a8944ad8, type: 3}
-  numberKey: {fileID: 5365349603526252472, guid: 2f9d56446a70fdf4abd03139a8944ad8, type: 3}
   inventoryManager: {fileID: 1145158381}
   playerAtack: {fileID: 1080252347}
 --- !u!61 &1080252349
@@ -669,6 +667,8 @@ MonoBehaviour:
   player: {fileID: 1080252340}
   fastHands: {fileID: 1738666237}
   prefabSlot: {fileID: 5694636952930163254, guid: fe219b880f4abfd4f88791a97b3fc9a9, type: 3}
+  initW: {fileID: 11400000, guid: fef4ad8c864c04347ba927215c94243a, type: 2}
+  initF: {fileID: 11400000, guid: bd915953079ed7349a8485d668fdb4a0, type: 2}
   slots: []
 --- !u!4 &1145158382
 Transform:
