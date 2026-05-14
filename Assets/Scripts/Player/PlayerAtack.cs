@@ -52,6 +52,7 @@ public class PlayerAtack : MonoBehaviour
     }
     public IEnumerator slashAnimation(GameObject slash)
     {
+
         slash.transform.rotation = Quaternion.Euler(0,0,Random.Range(-90,90));
         int ind = 0;
         while (ind < slashSpr.Length)

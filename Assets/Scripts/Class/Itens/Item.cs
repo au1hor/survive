@@ -66,6 +66,7 @@ public class Item
     public TypeItem typeItem;
     public Rarity rarity;
     public Sprite spriteIcon;
+    public Sprite[]Animation;
     public float cost;
     Rarity sortRarity()
     {

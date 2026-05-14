@@ -9,6 +9,8 @@ public class inventoryManager : MonoBehaviour
     public GameObject fastHands;
     public GameObject prefabSlot;
     public WeaponSo initW;
+    public WeaponSo initW1;
+
     public FoodSo initF;
     public Item[] initialItens;
     public List<GameObject> slots = new List<GameObject>();
@@ -23,15 +25,22 @@ public class inventoryManager : MonoBehaviour
         weapon arma = new weapon("DamagedS Wooden Sword");
         arma.setStats(initW.RangeDamage.y,initW.RangeRange.y,initW.RangeBaseWeight.y,0);
         arma.spriteIcon = initW.spriteIcon;
+        arma.Animation = initW.Animation;
+        weapon arma2 = new weapon("DamagedS Wooden Sword");
+        arma2.setStats(initW1.RangeDamage.y,initW1.RangeRange.y,initW1.RangeBaseWeight.y,0);
+        arma2.spriteIcon = initW1.spriteIcon;
+        arma2.Animation = initW1.Animation;
         Food comida = new Food("Bread all fucked");
         comida.setStatus(initF.satiety,initF.amount);
-        initialItens = new Item[]{arma,comida};
+        comida.spriteIcon = initF.spriteIcon;
+        initialItens = new Item[]{arma,arma2,comida};
         
     }
     public void addInitItensToIventory()
     {
         for (int i = 0; i < initialItens.Length; i++)
         {
+            Debug.Log(i);
              PlayerStats.instance.Inventory.Add(i,initialItens[i]);
              Debug.Log(initialItens[i] + "," + i);
         }
@@ -40,7 +49,6 @@ public class inventoryManager : MonoBehaviour
     private void createFastHands()
     {
         slots.Clear();
-        Debug.Log(PlayerStats.instance.Inventory[2]);
         for (int i = 0; i < PlayerStats.instance.playerSlots; i++)
         {
             GameObject newSlot = Instantiate(prefabSlot,fastHands.transform);
@@ -48,32 +56,39 @@ public class inventoryManager : MonoBehaviour
             if ( i < PlayerStats.instance.Inventory.Count)
             {
                     newSlot.name = $"[Slot[{i}]: {PlayerStats.instance.Inventory[i].itemName}]";
-                    newSlot.GetComponent<Image>().sprite =PlayerStats.instance.Inventory[i].spriteIcon; 
+                    Item instanc = PlayerStats.instance.Inventory[i];
+                    SlotObj slotScript =newSlot.GetComponent<SlotObj>();
+                    slotScript.slotNuber.text = (i+1).ToString();
+                    slotScript.icon.sprite = instanc.spriteIcon;
+                    newSlot.GetComponent<Image>().SetNativeSize();
             }else
             {
                 newSlot.name =$"[Slot[{i}]: Empty!!!]";
             }
             newSlot.GetComponentInChildren<TMP_Text>().text = (i +1).ToString();
-
         }
     }
     public void selectSlot(int indice)
     {
-        Debug.Log(indice);
         for (int i = 0; i < slots.Count; i++)
         {
+              SlotObj slotScr = slots[i].GetComponent<SlotObj>();
             if (i +1!= indice)
-            {
-             
-                slots[i].GetComponentInChildren<Image>().color = Color.white;
+            { 
+               slotScr.slotNuber.color  = Color.white;
+               slotScr.border.color = Color.white;
             }else
             {
-                slots[i].GetComponentInChildren<Image>().color = Color.yellow;
-            }
-            
+                slotScr.slotNuber.color  = Color.yellow;
+                slotScr.border.color = Color.yellow;
+            }   
         }
-       
         PlayerStats.instance.actualSlot = indice;
-        
+        PlayerStats.instance.actualItem = PlayerStats.instance.Inventory[indice -1];
+        if ( PlayerStats.instance.Inventory[indice -1] is weapon wp)
+        {
+
+            PlayerStats.instance.gameObject.GetComponent<PlayerAtack>().slashSpr = wp.Animation;
+        }
     }
 }

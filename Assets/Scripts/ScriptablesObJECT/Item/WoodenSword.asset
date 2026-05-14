@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSo
   itemName: Wooden Sword
   spriteIcon: {fileID: 6773952795744817372, guid: bf2feb6f8503d5146b42788fb512e0ed, type: 3}
+  Animation:
+  - {fileID: 3709430822655752209, guid: 646d65c0769c2be41a744bdb5b0ae826, type: 3}
+  - {fileID: -2742837884697204575, guid: 646d65c0769c2be41a744bdb5b0ae826, type: 3}
+  - {fileID: -4893035255070948666, guid: 646d65c0769c2be41a744bdb5b0ae826, type: 3}
+  - {fileID: 4393282396432645381, guid: 646d65c0769c2be41a744bdb5b0ae826, type: 3}
   cost: {x: 0, y: 0}
   typeItem: 0
   typeWeapon: 2
