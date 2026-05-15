@@ -503,7 +503,7 @@ Transform:
   m_GameObject: {fileID: 1080252340}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 0.13, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -553,8 +553,6 @@ MonoBehaviour:
   life: 200
   gold: 0
   xp: 0
-  actualSlot: 0
-  playerSlots: 5
 --- !u!114 &1080252347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,13 +565,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db194042d8468ef41a94d0dbd12e2011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAtack
-  slashSpr:
-  - {fileID: 5677171080727857361, guid: 9f1f3a712b63beb4cbb46134c34e6618, type: 3}
-  - {fileID: -138192981401557552, guid: 9f1f3a712b63beb4cbb46134c34e6618, type: 3}
-  - {fileID: -2581983348195004255, guid: 9f1f3a712b63beb4cbb46134c34e6618, type: 3}
-  - {fileID: 5539931098334098725, guid: 9f1f3a712b63beb4cbb46134c34e6618, type: 3}
-  - {fileID: -173377857, guid: 9f1f3a712b63beb4cbb46134c34e6618, type: 3}
+  RightAttackSprs: []
+  LeftAttackSprs: []
   atackPrefab: {fileID: 955583704205837086, guid: 54951a1928dab8044bc39b7b62fa6d5b, type: 3}
+  invManager: {fileID: 1145158381}
+  aniduration: 0.1
 --- !u!114 &1080252348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,7 +582,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c3d1c1c4e14204c88355ae7e337aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControler
-  slashAtack: {fileID: -8154108798746919089, guid: 2f9d56446a70fdf4abd03139a8944ad8, type: 3}
   inventoryManager: {fileID: 1145158381}
   playerAtack: {fileID: 1080252347}
 --- !u!61 &1080252349
@@ -669,6 +664,8 @@ MonoBehaviour:
   prefabSlot: {fileID: 5694636952930163254, guid: fe219b880f4abfd4f88791a97b3fc9a9, type: 3}
   initW: {fileID: 11400000, guid: fef4ad8c864c04347ba927215c94243a, type: 2}
   initW1: {fileID: 11400000, guid: 60c76be6d05c79e4c9899f883db008ff, type: 2}
+  playerSlotsBar: 5
+  actualSlot: 0
   initF: {fileID: 11400000, guid: bd915953079ed7349a8485d668fdb4a0, type: 2}
   slots: []
 --- !u!4 &1145158382
@@ -803,7 +800,7 @@ Transform:
   m_GameObject: {fileID: 1602185166}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.153, y: 0.076, z: 0}
+  m_LocalPosition: {x: 4.153, y: 0.076, z: -1}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -982,7 +979,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738666237}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

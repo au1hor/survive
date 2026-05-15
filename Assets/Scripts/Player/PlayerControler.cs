@@ -4,11 +4,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerControler : MonoBehaviour
 {
-    public InputActionReference slashAtack;
     public inventoryManager inventoryManager;
     public PlayerAtack playerAtack;
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+           playerAtack.normalAttack(0);
+        }else if (Input.GetMouseButtonDown(1))
+        {
+             playerAtack.normalAttack(1);
+        }
         if (Input.inputString!= "")
         {
             if (int.TryParse(Input.inputString,out int value))
@@ -17,20 +23,8 @@ public class PlayerControler : MonoBehaviour
             }
         }
     }
-    void OnEnable()
-    {
-        slashAtack.action.started += Slash;
-    }
-    void OnDisable()
-    {
-          slashAtack.action.started -= Slash;
-    }
     public void changeSlot(int value)
     {
         inventoryManager.selectSlot(value);
-    }
-    private void Slash(InputAction.CallbackContext obj)
-    {
-        playerAtack.slashAtack();
     }
 }

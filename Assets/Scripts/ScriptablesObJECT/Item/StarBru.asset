@@ -15,10 +15,12 @@ MonoBehaviour:
   itemName: ASDADADA
   spriteIcon: {fileID: -5826833231717089234, guid: de11f7374cf325f46a2bbeae9d1b0ce9, type: 3}
   Animation:
-  - {fileID: 6452587508832956905, guid: 6e9ae50f5c34ece4a8c8995b08836061, type: 3}
-  - {fileID: 961628101853107452, guid: 6e9ae50f5c34ece4a8c8995b08836061, type: 3}
-  - {fileID: -4804264787691668441, guid: 6e9ae50f5c34ece4a8c8995b08836061, type: 3}
-  - {fileID: -1296811135, guid: 6e9ae50f5c34ece4a8c8995b08836061, type: 3}
+  - {fileID: 3510615934124763085, guid: 12025d4c7707f0b45a254284450ce54a, type: 3}
+  - {fileID: 8626471326381149859, guid: 12025d4c7707f0b45a254284450ce54a, type: 3}
+  - {fileID: 4724971841986637422, guid: 12025d4c7707f0b45a254284450ce54a, type: 3}
+  - {fileID: -2148695232006262594, guid: 12025d4c7707f0b45a254284450ce54a, type: 3}
+  - {fileID: 6681982734088378316, guid: 12025d4c7707f0b45a254284450ce54a, type: 3}
+  - {fileID: -1565978435, guid: 12025d4c7707f0b45a254284450ce54a, type: 3}
   cost: {x: 0, y: 0}
   typeItem: 0
   typeWeapon: 2

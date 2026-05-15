@@ -5,25 +5,42 @@ using UnityEngine.InputSystem;
 
 public class PlayerAtack : MonoBehaviour
 {
-    public Sprite[] slashSpr;
+    public Sprite[] RightAttackSprs;
+    public Sprite[] LeftAttackSprs;
     public GameObject atackPrefab;
+    public inventoryManager invManager;
+    public float aniduration;
     Coroutine animAtack;
-    public void slashAtack()
+    public void normalAttack(int mouseButton)
     {
-        GameObject enemie = searchForEnemies();
-        if (enemie == null)
+        if (invManager.actualItem is weapon)
         {
-            Debug.Log("Dont find any enemies");
-            return;
+            GameObject enemie = searchForEnemies();
+            if (enemie == null)
+            {
+                Debug.Log("Dont find any enemies");
+                return;
+            }
+            if (mouseButton == 1)
+            {
+                GameObject rightAttack = Instantiate(atackPrefab,enemie.transform);
+                if (animAtack != null)
+                {
+                    StopCoroutine(animAtack);
+                    return;
+                }
+                RightAttackSprs = invManager.actualItem.Animation;
+                StartCoroutine(RightAnimation(rightAttack));
+                enemie.GetComponent<enemieStats>().changeLife(-10);
+            }else if (mouseButton == 0)
+            {
+                Debug.Log("Ataque leve esquerdo");
+            }
         }
-        GameObject slash = Instantiate(atackPrefab,enemie.transform.position,Quaternion.identity);
-        if (animAtack != null)
+        else
         {
-            StopCoroutine(animAtack);
-            return;
+            Debug.Log("Não é uma arma!!!!");
         }
-        StartCoroutine(slashAnimation(slash));
-        enemie.GetComponent<enemieStats>().changeLife(-10);
     }
     public GameObject searchForEnemies()
     {
@@ -50,18 +67,17 @@ public class PlayerAtack : MonoBehaviour
         }
         return sesh[minDist].collider.gameObject;
     }
-    public IEnumerator slashAnimation(GameObject slash)
+    public IEnumerator RightAnimation(GameObject attack)
     {
-
-        slash.transform.rotation = Quaternion.Euler(0,0,Random.Range(-90,90));
+        //  attack.transform.rotation = Quaternion.Euler(0,0,Random.Range(-90,90));
         int ind = 0;
-        while (ind < slashSpr.Length)
+        while (ind < RightAttackSprs.Length)
         {   
-            yield return new WaitForSeconds(0.05f);   
-            slash.GetComponent<SpriteRenderer>().sprite = slashSpr[ind];
+            yield return new WaitForSeconds(aniduration);   
+            attack.GetComponent<SpriteRenderer>().sprite = RightAttackSprs[ind];
             ind ++;
         }
-        Destroy(slash,0.05f);
+        Destroy(attack,0.05f);
      
     }
 }

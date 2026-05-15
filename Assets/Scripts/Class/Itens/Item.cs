@@ -163,7 +163,7 @@ public class weapon:Item
     public weapon(string itemName)
     :base(itemName)
     {
-        
+        typeItem = TypeItem.weapon;
     }
 }
 public class Food : Item
@@ -173,7 +173,7 @@ public class Food : Item
     public Food(string intemName)
     :base(intemName)
     {
-        this.typeItem = TypeItem.consumable;
+        typeItem = TypeItem.consumable;
     }
     public void setStatus(float satiety,int amount)
     {
