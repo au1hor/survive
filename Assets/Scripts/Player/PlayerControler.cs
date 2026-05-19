@@ -8,6 +8,10 @@ public class PlayerControler : MonoBehaviour
     public PlayerAtack playerAtack;
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            inventoryManager.showInventory();
+        }
         if (Input.GetMouseButtonDown(0))
         {
            playerAtack.normalAttack(0);

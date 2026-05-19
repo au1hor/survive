@@ -11,6 +11,8 @@ public class inventoryManager : MonoBehaviour
     public WeaponSo initW;
     public WeaponSo initW1;
 
+    public GameObject inventoryHud;
+
     public int playerSlotsBar = 5;
     public Item actualItem;
     public int actualSlot;
@@ -93,6 +95,17 @@ public class inventoryManager : MonoBehaviour
         }
         actualSlot = indice;
         actualItem = Inventory[indice -1];
+    }
+    public void showInventory()
+    {
+        if (inventoryHud.gameObject.activeSelf)
+        {
+            inventoryHud.gameObject.SetActive(false);
+        }else
+        {
+              inventoryHud.gameObject.SetActive(true);
+        }
+        
     }
 
 }

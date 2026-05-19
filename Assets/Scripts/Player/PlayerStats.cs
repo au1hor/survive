@@ -9,7 +9,9 @@ public class PlayerStats : MonoBehaviour
     public float life;
     //moneys and xp
     public float gold;
+    public int level;
     public float xp;
+    public float maxXp;
     void Awake()
     {
         if (instance != null && instance != this)
@@ -22,11 +24,15 @@ public class PlayerStats : MonoBehaviour
     }
     public void changeLife(float value)
     {
-        life += value;
+       
         if (life <= 0)
         {
             death();
         }
+    }
+    public void levelUp()
+    {
+          a = xp/maxXp
     }
     public void death()
     {
