@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class enemieStats : MonoBehaviour
 {
+   
     public enemieBehaviour enemieBehaviour;
     public PlayerStats PlayerStats;
     public enemieUi enemieUi;
@@ -37,8 +38,8 @@ public class enemieStats : MonoBehaviour
     }
     public void Death()
     {
-        PlayerStats.xp += xpCarry;
-        PlayerStats.gold += goldCarry;
+        PlayerStats.gainXp(xpCarry);
+        PlayerStats.gainGold(goldCarry);
         Destroy(this.gameObject,0.1f);
     }
 }

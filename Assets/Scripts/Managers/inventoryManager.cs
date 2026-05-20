@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -5,27 +6,28 @@ using UnityEngine.UI;
 
 public class inventoryManager : MonoBehaviour
 {
+    InventoryUi inventoryUi;
     public GameObject player;
-    public GameObject fastHands;
-    public GameObject prefabSlot;
-    public WeaponSo initW;
-    public WeaponSo initW1;
-
     public GameObject inventoryHud;
 
+    public WeaponSo initW;
+    public WeaponSo initW1;
     public int playerSlotsBar = 5;
     public Item actualItem;
     public int actualSlot;
 
     public FoodSo initF;
     public Item[] initialItens;
-    public List<GameObject> slots = new List<GameObject>();
     public Dictionary<int,Item>Inventory = new Dictionary<int, Item>();
+    //INfos
+    public TMP_Text title;
+    public TMP_Text namePlayer;
+    public TMP_Text lv;
+    // obj stats
+
     void Start()
     {
-        setInitialItens();
-        addInitItensToIventory();
-        createFastHands();
+        inventoryUi = GetComponent<InventoryUi>();
     }
     public void setInitialItens()
     {
@@ -56,46 +58,6 @@ public class inventoryManager : MonoBehaviour
             }
         }
     }
-    private void createFastHands()
-    {
-        slots.Clear();
-        for (int i = 0; i < playerSlotsBar; i++)
-        {
-            GameObject newSlot = Instantiate(prefabSlot,fastHands.transform);
-            slots.Add(newSlot);
-            if (Inventory[i] != null)
-            {
-                    newSlot.name = $"[Slot[{i}]: {Inventory[i].itemName}]";
-                    Item instanc = Inventory[i];
-                    SlotObj slotScript =newSlot.GetComponent<SlotObj>();
-                    slotScript.slotNuber.text = (i+1).ToString();
-                    slotScript.icon.sprite = instanc.spriteIcon;
-                    newSlot.GetComponent<Image>().SetNativeSize();
-            }else
-            {
-                newSlot.name =$"[Slot[{i}]: Empty!!!]";
-            }
-            newSlot.GetComponentInChildren<TMP_Text>().text = (i +1).ToString();
-        }
-    }
-    public void selectSlot(int indice)
-    {
-        for (int i = 0; i < slots.Count; i++)
-        {
-            SlotObj slotScr = slots[i].GetComponent<SlotObj>();
-            if (i +1!= indice)
-            { 
-               slotScr.slotNuber.color  = Color.white;
-               slotScr.border.color = Color.white;
-            }else
-            {
-                slotScr.slotNuber.color  = Color.yellow;
-                slotScr.border.color = Color.yellow;
-            }   
-        }
-        actualSlot = indice;
-        actualItem = Inventory[indice -1];
-    }
     public void showInventory()
     {
         if (inventoryHud.gameObject.activeSelf)
@@ -103,9 +65,11 @@ public class inventoryManager : MonoBehaviour
             inventoryHud.gameObject.SetActive(false);
         }else
         {
-              inventoryHud.gameObject.SetActive(true);
+            inventoryHud.gameObject.SetActive(true);
+            inventoryUi.updateUi();
         }
-        
     }
+
+
 
 }

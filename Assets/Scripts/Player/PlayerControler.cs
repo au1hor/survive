@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerControler : MonoBehaviour
 {
     public inventoryManager inventoryManager;
+    public InventoryUi inventoryUi;
     public PlayerAtack playerAtack;
     void Update()
     {
@@ -29,6 +30,6 @@ public class PlayerControler : MonoBehaviour
     }
     public void changeSlot(int value)
     {
-        inventoryManager.selectSlot(value);
+        inventoryUi.selectSlot(value);
     }
 }

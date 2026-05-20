@@ -4426,7 +4426,9 @@ MonoBehaviour:
   damage: 0
   life: 200
   gold: 0
+  level: 0
   xp: 0
+  maxXp: 0
 --- !u!114 &1080252347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4800,6 +4802,24 @@ MonoBehaviour:
   actualSlot: 0
   initF: {fileID: 11400000, guid: bd915953079ed7349a8485d668fdb4a0, type: 2}
   slots: []
+  title: {fileID: 2003746290}
+  namePlayer: {fileID: 1939893897}
+  lv: {fileID: 771679212}
+  Hp: {fileID: 829859716}
+  Mp: {fileID: 1927770050}
+  Str: {fileID: 166278044}
+  Int: {fileID: 879058273}
+  Vit: {fileID: 1817481635}
+  Agi: {fileID: 275150173}
+  Dex: {fileID: 1827927588}
+  Luk: {fileID: 1302088594}
+  Atk: {fileID: 464823109}
+  MAtk: {fileID: 147385185}
+  Def: {fileID: 1750108549}
+  MDef: {fileID: 341709627}
+  Crit: {fileID: 653204629}
+  Spd: {fileID: 462181840}
+  icons: {fileID: 710223898}
 --- !u!4 &1145158382
 Transform:
   m_ObjectHideFlags: 0

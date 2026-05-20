@@ -73,7 +73,8 @@ public class PlayerAtack : MonoBehaviour
         int ind = 0;
         while (ind < RightAttackSprs.Length)
         {   
-            yield return new WaitForSeconds(aniduration);   
+            yield return new WaitForSeconds(aniduration);
+            if(attack == null)break;   
             attack.GetComponent<SpriteRenderer>().sprite = RightAttackSprs[ind];
             ind ++;
         }

@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     public void FixedUpdate()
     {
         Vector2 vMove =move.action.ReadValue<Vector2>();
-        moveInput(vMove * stats.speed);
+        moveInput(vMove * stats.stats[PlayerStats.StatType.SPD].value);
     }
     public void moveInput(Vector2 value)
     {
