@@ -99,7 +99,13 @@ public class InventoryUi : MonoBehaviour
         {
             if (i <= 7)
             {
-                statUis[i].statsTab.plus.gameObject.SetActive(true);
+                if ( statUis[i].statsTab.plus != null)
+                {
+                    statUis[i].statsTab.plus.gameObject.SetActive(true);
+                }else
+                {
+                    Debug.Log("Botão não encontrado!!");
+                }
             }else
             {
                 break;
@@ -112,7 +118,13 @@ public class InventoryUi : MonoBehaviour
         {
             if (i <= 7)
             {
-                statUis[i].statsTab.plus.gameObject.SetActive(false);
+                if ( statUis[i].statsTab.plus != null)
+                {
+                    statUis[i].statsTab.plus.gameObject.SetActive(false);
+                }else
+                {
+                    Debug.Log("Botão não encontrado!!");
+                }
             }else
             {
                 break;
