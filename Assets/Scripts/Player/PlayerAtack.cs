@@ -31,7 +31,7 @@ public class PlayerAtack : MonoBehaviour
                 }
                 RightAttackSprs = invManager.actualItem.Animation;
                 StartCoroutine(RightAnimation(rightAttack));
-                enemie.GetComponent<enemieStats>().changeLife(-10);
+                enemie.GetComponent<enemieStats>().changeLife(PlayerStats.instance.stats[PlayerStats.StatType.ATK].finalValue * -1);
             }else if (mouseButton == 0)
             {
                 Debug.Log("Ataque leve esquerdo");

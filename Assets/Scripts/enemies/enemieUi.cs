@@ -54,7 +54,7 @@ public class enemieUi : MonoBehaviour
         GameObject newObj = Instantiate(popUpDmg,mainCanvas);
         newObj.transform.position = screenPos;
         newObj.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100,100),500),ForceMode2D.Impulse);
-        newObj.GetComponent<TMP_Text>().text = value.ToString();
+        newObj.GetComponent<TMP_Text>().text = value.ToString("F0");
         Destroy(newObj,1f);
     }
 

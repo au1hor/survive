@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,8 +44,15 @@ public class InventoryUi : MonoBehaviour
         foreach (var item in PlayerStats.instance.stats)
         {
            PlayerStats.StatType type = item.Key;
-           UiDic[type].statsTab.value.text = PlayerStats.instance.stats[type].finalValue.ToString();
-           UiDic[type].statsTab.statType = type;
+           if (UiDic.TryGetValue(type, out _))
+           {
+            UiDic[type].statsTab.value.text = PlayerStats.instance.stats[type].finalValue.ToString("F0");
+            UiDic[type].statsTab.statType = type;
+           }else
+           {
+            Debug.Log("Tipo não presente no dicionario");
+           }
+           
         }
         if (PlayerStats.instance.levelPoints <= 0)
         {

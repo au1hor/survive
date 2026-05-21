@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -22,14 +24,39 @@ public class PlayerStats : MonoBehaviour
         MDEF,
         CRIT,
         SPD,
+        //plus statsu
+        MPREGEN,
+        CRITCHANCE,
+        REGEN,
+        CDR,
     }
     public class statValues
     {
         public float value;
+        public float multi = 0.66f;
         public float bonus;
         public float finalValue{get{return value += bonus;}}
     }
     public Dictionary<StatType,statValues> stats = new Dictionary<StatType, statValues>();
+    public Dictionary<StatType,StatType> proportionality = new Dictionary<StatType, StatType>()
+    {
+        {StatType.STR,StatType.ATK},
+        {StatType.INT,StatType.MP},
+        {StatType.VIT,StatType.HP},
+        {StatType.AGI,StatType.SPD},
+        {StatType.DEX,StatType.DEF},
+        {StatType.LUK,StatType.CRITCHANCE},
+    };
+     public Dictionary<StatType,StatType> subProportionality = new Dictionary<StatType, StatType>()
+    {
+        {StatType.STR,StatType.MATK},
+        {StatType.INT,StatType.MATK},
+        //{StatType.INT,StatType.STR},
+        {StatType.VIT,StatType.ATK},
+        {StatType.AGI,StatType.CDR},
+        {StatType.DEX,StatType.SPD},
+        {StatType.LUK,StatType.CRIT},
+    };
     public int levelPoints;    
     //moneys and xp
     public float gold;
@@ -50,9 +77,9 @@ public class PlayerStats : MonoBehaviour
         {
             stats.Add(stat,new statValues());
         }
-        stats[StatType.HP].value = 100;
+        stats[StatType.HP].value = 10;
         stats[StatType.SPD].value =20;
-        stats[StatType.ATK].value =10;
+        stats[StatType.ATK].value =1;
 
     }
     public void changeLife(float value)
@@ -81,13 +108,18 @@ public class PlayerStats : MonoBehaviour
         Debug.Log(value);
         
     }
-    public void UpStat(StatType type, float value)
+    public void UpStat(StatType type, float value,int quant =1)
     {
-        stats[type].value += value;
-        levelPoints --;
+        stats[type].value += value * quant;
+        levelPoints -= 1* quant;
+        for (int i = 0; i < quant; i++)
+        {
+        
+            stats[proportionality[type]].value += (stats[type].finalValue > 0?stats[type].finalValue:1)/4.5f;
+            stats[subProportionality[type]].value +=(stats[type].finalValue > 0?stats[type].finalValue:1)/9.5f;
+                Debug.Log(i + "  " +   stats[proportionality[type]].value);
+        }
         inventoryUi.updateUi();
-
-
     }
     public void levelUp(int value)
     {
