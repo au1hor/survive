@@ -110,14 +110,12 @@ public class PlayerStats : MonoBehaviour
     }
     public void UpStat(StatType type, float value,int quant =1)
     {
-        stats[type].value += value * quant;
-        levelPoints -= 1* quant;
         for (int i = 0; i < quant; i++)
         {
-        
-            stats[proportionality[type]].value += (stats[type].finalValue > 0?stats[type].finalValue:1)/4.5f;
-            stats[subProportionality[type]].value +=(stats[type].finalValue > 0?stats[type].finalValue:1)/9.5f;
-                Debug.Log(i + "  " +   stats[proportionality[type]].value);
+            stats[type].value += value;
+            levelPoints --;
+            stats[proportionality[type]].value += (stats[type].finalValue > 0?stats[type].finalValue:1)/20.5f;
+            stats[subProportionality[type]].value +=(stats[type].finalValue > 0?stats[type].finalValue:1)/31.5f;
         }
         inventoryUi.updateUi();
     }
