@@ -22,6 +22,8 @@ public class PlayerUi : MonoBehaviour
     public void LvUpPopUp()
     {
         GameObject popUp = Instantiate(lvUpPopUp,canvas.transform);
+        Vector2 playerTOcanvas = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
+        popUp.transform.position = playerTOcanvas;
         StartCoroutine(PopAnimationGain(popUp));
         
     }

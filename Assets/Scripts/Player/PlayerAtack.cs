@@ -69,7 +69,7 @@ public class PlayerAtack : MonoBehaviour
     }
     public IEnumerator RightAnimation(GameObject attack)
     {
-        //  attack.transform.rotation = Quaternion.Euler(0,0,Random.Range(-90,90));
+        attack.transform.rotation = Quaternion.Euler(0,0,Random.Range(-90,90));
         int ind = 0;
         while (ind < RightAttackSprs.Length)
         {   

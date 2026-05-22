@@ -114,8 +114,8 @@ public class PlayerStats : MonoBehaviour
         {
             stats[type].value += value;
             levelPoints --;
-            stats[proportionality[type]].value += (stats[type].finalValue > 0?stats[type].finalValue:1)/20.5f;
-            stats[subProportionality[type]].value +=(stats[type].finalValue > 0?stats[type].finalValue:1)/31.5f;
+            stats[proportionality[type]].value += (stats[type].finalValue > 0?stats[type].finalValue:1)/5.5f;
+            stats[subProportionality[type]].value +=(stats[type].finalValue > 0?stats[type].finalValue:1)/51.5f;
         }
         inventoryUi.updateUi();
     }
