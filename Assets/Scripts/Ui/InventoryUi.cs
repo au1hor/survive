@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventoryUi : MonoBehaviour
 {
@@ -13,6 +10,7 @@ public class InventoryUi : MonoBehaviour
     public GameObject fastHands;
     public TMP_Text playerName;
     public TMP_Text levelText;
+    public TMP_Text lifeMainTxt;
 
     public List<GameObject> slots = new List<GameObject>();
     [SerializeField] private List<StatUi> statUis = new List<StatUi>();
@@ -34,13 +32,15 @@ public class InventoryUi : MonoBehaviour
         inventoryManager = GetComponent<inventoryManager>();
         inventoryManager.setInitialItens();
         inventoryManager.addInitItensToIventory();
-        createFastHands();
+        Invoke(nameof(createFastHands),0.5f);
+        
         updateUi();
     }
     public void updateUi()
     {
         playerName.text =  $"Level: {PlayerStats.instance.playerNick}";
         levelText.text = $"Level: {PlayerStats.instance.level}";
+        lifeMainTxt.text = $"{PlayerStats.instance.currentHp}/{PlayerStats.instance.stats[PlayerStats.StatType.HP].finalValue}";
         foreach (var item in PlayerStats.instance.stats)
         {
            PlayerStats.StatType type = item.Key;

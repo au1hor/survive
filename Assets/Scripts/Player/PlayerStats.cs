@@ -61,6 +61,7 @@ public class PlayerStats : MonoBehaviour
     //moneys and xp
     public float gold;
     public int level;
+    public float currentHp;
     public float xp;
     public float maxXp;
 
@@ -82,10 +83,15 @@ public class PlayerStats : MonoBehaviour
         stats[StatType.ATK].value =1;
 
     }
+    public void Start()
+    {
+        currentHp = stats[StatType.HP].finalValue;
+    }
     public void changeLife(float value)
     {
-        stats[StatType.HP].value += value;
-        if (stats[StatType.HP].value <= 0)
+        currentHp +=value;
+        inventoryUi.updateUi();
+        if (currentHp <= 0)
         {
             death();
         }
@@ -115,6 +121,23 @@ public class PlayerStats : MonoBehaviour
             stats[type].value += value;
             levelPoints --;
             stats[proportionality[type]].value += (stats[type].finalValue > 0?stats[type].finalValue:1)/5.5f;
+            if (proportionality[type] == StatType.HP)
+            {
+                if (currentHp == stats[StatType.HP].finalValue)
+                {
+                    currentHp = stats[StatType.HP].finalValue;
+                }
+                else if (currentHp < stats[StatType.HP].finalValue)
+                {
+                    float heal = currentHp *0.1f;
+                    if (heal + currentHp < stats[StatType.HP].finalValue)
+                    {
+                          Debug.Log(stats[StatType.HP].finalValue + "sa dasdbsadby uasduavu sadbu");
+                          currentHp += heal;
+                    }
+                  
+                }
+            }
             stats[subProportionality[type]].value +=(stats[type].finalValue > 0?stats[type].finalValue:1)/51.5f;
         }
         inventoryUi.updateUi();
