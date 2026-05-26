@@ -123,7 +123,12 @@ public class enemieBehaviour : MonoBehaviour
     }
     IEnumerator attackingAni()
     {
-        player.GetComponent<PlayerStats>().changeLife(-10);
+        DamageInfo atac = new DamageInfo();
+        atac.attacker = this.gameObject;
+        atac.damage = 10;
+        atac.critical = false;
+
+        player.GetComponent<PlayerStats>().TakeDamage(atac);
         yield return null;
     }
     Coroutine getHittedAni;

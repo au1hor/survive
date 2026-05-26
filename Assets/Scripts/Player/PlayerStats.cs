@@ -87,14 +87,29 @@ public class PlayerStats : MonoBehaviour
     {
         currentHp = stats[StatType.HP].finalValue;
     }
-    public void changeLife(float value)
+    public void TakeDamage(DamageInfo info)
     {
-        currentHp +=value;
+        playerEvents.OnbeforeGetDamage?.Invoke(this,info);
+        currentHp +=info.damage;
+        playerEvents.OnafterGetDamage?.Invoke(this,info);
         inventoryUi.updateUi();
         if (currentHp <= 0)
         {
             death();
         }
+    }
+    public void Heal(float value)
+    {
+        playerEvents.OnBeforeGetHeal?.Invoke(this,value);
+        currentHp += value;
+        PlayerUi.Instance.VampireAbsorb(transform.position,value);
+        inventoryUi.updateUi();
+        if (currentHp < stats[StatType.HP].finalValue && value + currentHp < stats[StatType.HP].finalValue)
+        {
+           
+        }
+        playerEvents.OnAfterGetHeal?.Invoke(this,value);
+        
     }
     public void gainXp(float value)
     {

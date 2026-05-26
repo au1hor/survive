@@ -1,11 +1,13 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUi : MonoBehaviour
 {
     public static PlayerUi Instance{get; private set;}
     public Canvas canvas;
+    public GameObject popUpDmg;
     public GameObject lvUpPopUp;
 
 
@@ -26,6 +28,20 @@ public class PlayerUi : MonoBehaviour
         popUp.transform.position = playerTOcanvas;
         StartCoroutine(PopAnimationGain(popUp));
         
+    }
+    public void HealPopUp()
+    {
+        
+    }
+    public void VampireAbsorb(Vector2 worldPos,float value)
+    {
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+        GameObject newObj = Instantiate(popUpDmg,canvas.transform);
+        newObj.transform.position = screenPos;
+        newObj.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100,100),500),ForceMode2D.Impulse);
+        newObj.GetComponent<TMP_Text>().text = value.ToString("F1");
+        Destroy(newObj,1f);
+    
     }
     IEnumerator PopAnimationGain(GameObject gainPopUp)
     {

@@ -19,21 +19,17 @@ public class enemieStats : MonoBehaviour
         enemieBehaviour = this.GetComponent<enemieBehaviour>();
         enemieUi = GetComponent<enemieUi>();
     }
-    public void changeLife(float value)
+    public void TakeDamage(DamageInfo damageInfo)
     {
-        if (value <= 0)
+        CombatEvents.onBeforeEnemyDamaged?.Invoke(this,damageInfo);
+        life -=damageInfo.damage;
+        enemieUi.damagePopUp(transform.position,damageInfo.damage);
+        enemieBehaviour.changingState(enemieBehaviour.states.hitted);
+         CombatEvents.onAfterEnemyDamaged?.Invoke(this,damageInfo);
+        if (life <= 0)
         {
-            life +=value;
-            enemieUi.damagePopUp(transform.position,value);
-            enemieBehaviour.changingState(enemieBehaviour.states.hitted);
-            if (life <= 0)
-            {
-                Death();
-            }
-        }
-        else
-        {
-            Debug.Log("Curado ou buff");
+            Death();
+            CombatEvents.onEnemyKilled?.Invoke(this,damageInfo);
         }
     }
     public void Death()
