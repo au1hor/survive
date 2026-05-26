@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Hard Bread
+  m_Script: {fileID: 11500000, guid: 1cc72a16a2be402469170d48bd7a2514, type: 3}
+  m_Name: Bread
   m_EditorClassIdentifier: Assembly-CSharp::FoodSo
-  itemName: Hard Bread
+  itemName: Bread all Fucked
   spriteIcon: {fileID: -7892700149566274367, guid: 490398d2971053c4890c21c560e1c341, type: 3}
-  cost: {x: 0, y: 20}
+  Animation: []
+  cost: {x: 1, y: 0}
   typeItem: 1
   rarity: 0
   amount: 3
-  satiety: 5
+  satiety: 1

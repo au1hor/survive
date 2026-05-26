@@ -26,14 +26,12 @@ public class InventoryUi : MonoBehaviour
         {
             UiDic.Add(stat.statType,stat);
         }
+        inventoryManager.setInitialItens();
+        inventoryManager.addInitItensToIventory();
     }
     public void Start()
     {
-        inventoryManager = GetComponent<inventoryManager>();
-        inventoryManager.setInitialItens();
-        inventoryManager.addInitItensToIventory();
-        Invoke(nameof(createFastHands),0.5f);
-        
+        createFastHands();
         updateUi();
     }
     public void updateUi()

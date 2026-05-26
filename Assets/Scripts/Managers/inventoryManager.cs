@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-
 public class inventoryManager : MonoBehaviour
 {
-    InventoryUi inventoryUi;
+    public InventoryUi inventoryUi;
     public GameObject player;
     public GameObject inventoryHud;
 
@@ -27,7 +24,7 @@ public class inventoryManager : MonoBehaviour
 
     void Start()
     {
-        inventoryUi = GetComponent<InventoryUi>();
+     
     }
     public void setInitialItens()
     {

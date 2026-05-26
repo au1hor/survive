@@ -612,7 +612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -208.9, y: -188.3}
+  m_AnchoredPosition: {x: -213.1, y: -171.4}
   m_SizeDelta: {x: 12, y: 11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &151321560
@@ -5419,13 +5419,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9be950ef5a50af4698e813e967f8a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::inventoryManager
+  inventoryUi: {fileID: 1145158383}
   player: {fileID: 1080252340}
   inventoryHud: {fileID: 1742801778}
   initW: {fileID: 11400000, guid: fef4ad8c864c04347ba927215c94243a, type: 2}
-  initW1: {fileID: 11400000, guid: 60c76be6d05c79e4c9899f883db008ff, type: 2}
+  initW1: {fileID: 11400000, guid: ed3e06e6e04fce24f886c8b62799f5b3, type: 2}
   playerSlotsBar: 5
   actualSlot: 0
-  initF: {fileID: 11400000, guid: bd915953079ed7349a8485d668fdb4a0, type: 2}
+  initF: {fileID: 11400000, guid: c2e9d8f629de1104caf84a6a957b2fd6, type: 2}
   title: {fileID: 2003746290}
   namePlayer: {fileID: 1939893897}
   lv: {fileID: 771679212}
@@ -9507,6 +9508,7 @@ GameObject:
   - component: {fileID: 1792584539}
   - component: {fileID: 1792584538}
   - component: {fileID: 1792584541}
+  - component: {fileID: 1792584542}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9532,7 +9534,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.35323957, g: 0.36995667, b: 0.3962264, a: 0}
+  m_BackGroundColor: {r: 0.2264151, g: 0.20612317, b: 0.20612317, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -9557,7 +9559,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 6.79
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9632,6 +9634,20 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1792584542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792584537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a034983d636b447b8aaec6b0d3e9f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::cameraBehaviour
+  player: {fileID: 1080252340}
+  speed: 7
 --- !u!1 &1817481635
 GameObject:
   m_ObjectHideFlags: 0

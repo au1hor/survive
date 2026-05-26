@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 267e8b21eca41ef4cb6ab223d0fe2111, type: 3}
   m_Name: WoodenSword
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSo
-  itemName: Wooden Sword
+  itemName: WoodenSword
   spriteIcon: {fileID: 7546559539270643266, guid: e57959c0ddae095419ef9e4f809825bd, type: 3}
   Animation:
   - {fileID: 3709430822655752209, guid: 646d65c0769c2be41a744bdb5b0ae826, type: 3}
@@ -22,7 +22,7 @@ MonoBehaviour:
   cost: {x: 0, y: 0}
   typeItem: 0
   typeWeapon: 2
-  creatorName: World
-  RangeDamage: {x: 0, y: 3}
-  RangeRange: {x: 1, y: 1}
-  RangeBaseWeight: {x: 700, y: 700}
+  creatorName: joseph
+  RangeDamage: {x: 0, y: 0}
+  RangeRange: {x: 0, y: 0}
+  RangeBaseWeight: {x: 0, y: 0}
