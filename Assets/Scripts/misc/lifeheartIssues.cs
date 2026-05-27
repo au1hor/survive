@@ -15,19 +15,20 @@ public class lifeheartIssues : MonoBehaviour
 
     public void Start()
     {
-        heartAni();
+        StartCoroutine(heartAni());
     }
     IEnumerator heartAni()
     {
         int i = 0;
         while (true)
         {
-            heart.sprite = sprs[i];
-            i++;
-            if (i > sprs.Length)
+             if (i + 1 > sprs.Length)
             {
                 i = 0;
             }
+                heart.sprite = sprs[i];
+                i++;
+            
             yield return new WaitForSeconds(speed);
         }
         
