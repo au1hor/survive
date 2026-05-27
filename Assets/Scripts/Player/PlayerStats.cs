@@ -113,6 +113,7 @@ public class PlayerStats : MonoBehaviour
     }
     public void gainXp(float value)
     {
+        playerEvents.OnBeforeGetXp?.Invoke(this);
         xp += value;
         if (xp >= maxXp)
         {
@@ -126,6 +127,7 @@ public class PlayerStats : MonoBehaviour
             }
             levelUp(levels);
         }
+        playerEvents.OnAfterGetXp?.Invoke(this);
         Debug.Log(value);
         
     }
