@@ -5312,6 +5312,16 @@ MonoBehaviour:
   move: {fileID: 4093772412711771, guid: 2f9d56446a70fdf4abd03139a8944ad8, type: 3}
   stats: {fileID: 0}
   rb: {fileID: 1080252345}
+  playerSpr: {fileID: 1080252343}
+  runAnimation:
+  - {fileID: -8697706078897085806, guid: 77d59e4a3d8820a4e829c59639dde090, type: 3}
+  - {fileID: 2347702887534774012, guid: 77d59e4a3d8820a4e829c59639dde090, type: 3}
+  - {fileID: 8960415039766146493, guid: 77d59e4a3d8820a4e829c59639dde090, type: 3}
+  - {fileID: 1213110276452681348, guid: 77d59e4a3d8820a4e829c59639dde090, type: 3}
+  - {fileID: -827709917123030867, guid: 77d59e4a3d8820a4e829c59639dde090, type: 3}
+  idle:
+  - {fileID: 5104849611727124738, guid: 77d59e4a3d8820a4e829c59639dde090, type: 3}
+  duration: 0
 --- !u!212 &1080252343
 SpriteRenderer:
   serializedVersion: 2
