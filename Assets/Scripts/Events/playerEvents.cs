@@ -9,6 +9,10 @@ public static class playerEvents{
     public static Action<PlayerStats,DamageInfo>OnPlayerKilled;
     public static Action<PlayerStats,float>OnBeforeGetHeal;
     public static Action<PlayerStats,float>OnAfterGetHeal;
+    public static Action<SpriteRenderer>OnTurnToTop;
+    public static Action<SpriteRenderer>OnTurnToDown;
+    public static Action<SpriteRenderer>OnTurnToleft;
+    public static Action<SpriteRenderer>OnTurnToRight;
 
 
 }
